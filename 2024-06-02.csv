@@ -1,0 +1,89 @@
+Agent Name,Total Calls,Total Talk Time,Incoming Total,Incoming Missed,Incoming Avg Per Hour,Incoming  Talk Time,Incoming  Average Talk Time,Incoming Max Talk Time,Incoming Average Ring Time,Outgoing Total,Outgoing Avg Per Hour,Outgoing Unanswered,Outgoing Answered,Outgoing Total Talk Time,Outgoing Avg Talk Time,Outgoing Max Talk Time
+Kasia 203 <203> ,29,01:11:29,18,0,17.87,01:00:27,00:03:21,00:29:36,00:00:08,11,59.82,2,9,00:11:02,00:01:00,00:05:27
+Serish 202 <202> ,24,00:27:49,10,0,44.17,00:13:35,00:01:21,00:05:42,00:00:18,14,59.02,3,11,00:14:14,00:01:01,00:04:08
+Manager 200 <200> ,0,00:00:00,0,0,0,00:00:00,00:00:00,00:00:00,00:00:00,0,0,0,0,00:00:00,00:00:00,00:00:00
+Nikolett 201 <201> ,0,00:00:00,0,0,0,00:00:00,00:00:00,00:00:00,00:00:00,0,0,0,0,00:00:00,00:00:00,00:00:00
+Total,53,1:39:18,28,0,62.040000000000006,2:14:29,0:04:42,0:35:18,0:00:26,25,118.84,5,20,0:25:16,0:02:01,0:09:35
+,,,,,
+,,,,,
+User,Date and Time,Source,Destination,Duration,Direction
+,,,,,
+SummaryKasia 203 <203> ,,,,,,,,,,,,,,,,
+Agent Name,Total Calls,Total Talk Time,Incoming Total,Incoming Missed,Incoming Avg Per Hour,Incoming  Talk Time,Incoming  Average Talk Time,Incoming Max Talk Time,Incoming Average Ring Time,Outgoing Total,Outgoing Avg Per Hour,Outgoing Unanswered,Outgoing Answered,Outgoing Total Talk Time,Outgoing Avg Talk Time,Outgoing Max Talk Time
+Kasia 203 <203> ,29,01:11:29,18,0,17.87,01:00:27,00:03:21,00:29:36,00:00:08,11,59.82,2,9,00:11:02,00:01:00,00:05:27
+,,,,,
+User,Date and Time,Source,Destination,Duration,Direction
+203,2024-06-07 16:07:12,07934527944,+441733806883,00:02:48,Incoming
+203,2024-06-07 15:25:27,442380982099,01260280290,00:00:36,Outgoing
+203,2024-06-07 15:23:33,442380982099,07577484857,00:01:42,Outgoing
+203,2024-06-07 15:17:56,442380982099,01260280290,00:05:27,Outgoing
+203,2024-06-07 15:09:24,07577484857,+441614644219,00:03:49,Incoming
+203,2024-06-06 15:57:46,442380982099,07869148583,00:00:00,Outgoing
+203,2024-06-06 15:21:45,07934527944,+441733806883,00:29:45,Incoming
+203,2024-06-06 15:19:31,442380982099,07411633339,00:00:21,Outgoing
+203,2024-06-06 15:17:58,07869148583,+442380983370,00:00:53,Incoming
+203,2024-06-06 15:09:10,442380982099,07459245920,00:01:08,Outgoing
+203,2024-06-06 14:34:47,07869148583,+442380983370,00:00:23,Incoming
+203,2024-06-06 14:02:06,01489775500,+441274061781,00:01:14,Incoming
+203,2024-06-06 13:04:37,442380982099,01260288333,00:01:16,Outgoing
+203,2024-06-05 18:12:45,07412917579,+441733806883,00:01:08,Incoming
+203,2024-06-05 14:34:01,07852544824,+442380982099,00:00:23,Incoming
+203,2024-06-05 14:24:15,07852544824,+442380982099,00:01:34,Incoming
+203,2024-06-04 18:44:59,442380982099,02380866416,00:00:21,Outgoing
+203,2024-06-04 17:52:36,02380862570,+441733806883,00:09:55,Incoming
+203,2024-06-04 16:55:33,07928161060,+442380983370,00:00:27,Incoming
+203,2024-06-04 15:28:40,442380982099,07869148583,00:00:00,Outgoing
+203,2024-06-04 15:19:18,02079022330,+442380982099,00:00:39,Incoming
+203,2024-06-03 19:34:44,07577484857,+441614644219,00:03:47,Incoming
+203,2024-06-03 18:20:52,01489775500,+441274061781,00:00:41,Incoming
+203,2024-06-03 16:35:23,07798204742,+441733806883,00:00:16,Incoming
+203,2024-06-03 16:02:15,07354590396,+442380983370,00:01:21,Incoming
+203,2024-06-03 14:34:51,07928161060,+442380983370,00:00:50,Incoming
+203,2024-06-03 12:17:06,07742135493,+442380983370,00:00:34,Incoming
+,,,,,
+SummarySerish 202 <202> ,,,,,,,,,,,,,,,,
+Agent Name,Total Calls,Total Talk Time,Incoming Total,Incoming Missed,Incoming Avg Per Hour,Incoming  Talk Time,Incoming  Average Talk Time,Incoming Max Talk Time,Incoming Average Ring Time,Outgoing Total,Outgoing Avg Per Hour,Outgoing Unanswered,Outgoing Answered,Outgoing Total Talk Time,Outgoing Avg Talk Time,Outgoing Max Talk Time
+Serish 202 <202> ,24,00:27:49,10,0,44.17,00:13:35,00:01:21,00:05:42,00:00:18,14,59.02,3,11,00:14:14,00:01:01,00:04:08
+,,,,,
+User,Date and Time,Source,Destination,Duration,Direction
+202,2024-06-07 15:22:30,01489775500,+441274061781,00:00:34,Incoming
+202,2024-06-05 15:53:00,442380983370,01189722028,00:00:06,Outgoing
+202,2024-06-05 15:46:37,07812694541,+441614644219,00:05:53,Incoming
+202,2024-06-05 15:32:21,01489775500,+441274061781,00:00:33,Incoming
+202,2024-06-04 18:43:54,07740163776,+442380983370,00:02:04,Incoming
+202,2024-06-04 18:38:17,442380983370,01189722028,00:00:12,Outgoing
+202,2024-06-04 18:37:53,442380983370,01189722028,00:00:19,Outgoing
+202,2024-06-04 18:35:52,442380983370,07740163776,00:01:09,Outgoing
+202,2024-06-04 15:53:27,01489775500,+441274061781,00:00:38,Incoming
+202,2024-06-03 19:20:39,01489775500,+441274061781,00:00:34,Incoming
+202,2024-06-03 16:26:08,07742135493,+442380983370,00:00:58,Incoming
+202,2024-06-03 15:35:55,07506212334,+441733806883,00:00:48,Incoming
+202,2024-06-03 14:50:30,07577484857,+442380983370,00:01:44,Incoming
+202,2024-06-03 14:45:14,442380983370,07795104517,00:04:08,Outgoing
+202,2024-06-03 14:39:36,442380983370,07928161060,00:03:47,Outgoing
+202,2024-06-03 14:23:11,07870619852,+442380983370,00:01:48,Incoming
+202,2024-06-03 14:17:50,442380983370,07870619852,00:00:00,Outgoing
+202,2024-06-03 14:15:41,442380983370,07587451784,00:00:42,Outgoing
+202,2024-06-03 14:15:34,202,7587451784,00:00:00,Outgoing
+202,2024-06-03 14:14:53,442380983370,07928161060,00:00:05,Outgoing
+202,2024-06-03 14:07:22,442380983370,01582412552,00:01:28,Outgoing
+202,2024-06-03 13:41:47,442380983370,01582730256,00:01:03,Outgoing
+202,2024-06-03 13:36:02,442380983370,01582733078,00:00:00,Outgoing
+,,,,,
+SummaryManager 200 <200> ,,,,,,,,,,,,,,,,
+Agent Name,Total Calls,Total Talk Time,Incoming Total,Incoming Missed,Incoming Avg Per Hour,Incoming  Talk Time,Incoming  Average Talk Time,Incoming Max Talk Time,Incoming Average Ring Time,Outgoing Total,Outgoing Avg Per Hour,Outgoing Unanswered,Outgoing Answered,Outgoing Total Talk Time,Outgoing Avg Talk Time,Outgoing Max Talk Time
+Manager 200 <200> ,0,00:00:00,0,0,0,00:00:00,00:00:00,00:00:00,00:00:00,0,0,0,0,00:00:00,00:00:00,00:00:00
+,,,,,
+User,Date and Time,Source,Destination,Duration,Direction
+,,,,,
+SummaryNikolett 201 <201> ,,,,,,,,,,,,,,,,
+Agent Name,Total Calls,Total Talk Time,Incoming Total,Incoming Missed,Incoming Avg Per Hour,Incoming  Talk Time,Incoming  Average Talk Time,Incoming Max Talk Time,Incoming Average Ring Time,Outgoing Total,Outgoing Avg Per Hour,Outgoing Unanswered,Outgoing Answered,Outgoing Total Talk Time,Outgoing Avg Talk Time,Outgoing Max Talk Time
+Nikolett 201 <201> ,0,00:00:00,0,0,0,00:00:00,00:00:00,00:00:00,00:00:00,0,0,0,0,00:00:00,00:00:00,00:00:00
+,,,,,
+User,Date and Time,Source,Destination,Duration,Direction
+,,,,,
+SummaryTotal,,,,,,,,,,,,,,,,
+Agent Name,Total Calls,Total Talk Time,Incoming Total,Incoming Missed,Incoming Avg Per Hour,Incoming  Talk Time,Incoming  Average Talk Time,Incoming Max Talk Time,Incoming Average Ring Time,Outgoing Total,Outgoing Avg Per Hour,Outgoing Unanswered,Outgoing Answered,Outgoing Total Talk Time,Outgoing Avg Talk Time,Outgoing Max Talk Time
+Total,53,1:39:18,28,0,62.040000000000006,2:14:29,0:04:42,0:35:18,0:00:26,25,118.84,5,20,0:25:16,0:02:01,0:09:35
+,,,,,
+User,Date and Time,Source,Destination,Duration,Direction

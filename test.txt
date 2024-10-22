@@ -1,0 +1,93 @@
+import time
+from pymongo import MongoClient
+import schedule
+import threading
+from datetime import datetime
+
+# MongoDB connection
+client = MongoClient("mongodb://localhost:27017")
+db = client["hunters"]
+active_calls_data = db['active_calls']
+settings = db['settings']
+
+# Fetch settings
+datasettings = settings.find({})
+listsettings = list(datasettings)
+
+# Initial settings fetch
+timedata = listsettings[0]['time']
+email = listsettings[0]['email']
+
+timers = {}
+
+# Function to set timer for each UID
+def set_timer(uid, idle_time):
+    def timer_action(uid):
+        print(f' User {uid} has been idle for {timedata}.')
+
+    
+
+    # Setting a new timer
+  
+    timer = threading.Timer(idle_time * 60, timer_action, [uid])
+    timer.start()
+    timers[uid] = {
+        'timer': timer,
+        'start_time': time.time(),
+        'idle_time': idle_time * 60  # Convert minutes to seconds
+    }
+
+# Function to check the idle status of users
+def check_idle_status():
+    data_calls = active_calls_data.find({})
+    data_calls_list = list(data_calls)
+    
+    datasettings = settings.find({})
+    listsettings = list(datasettings)
+
+    timedata = listsettings[0]['time']
+    email = listsettings[0]['email']
+
+    print(f'{datetime.now()} - Checking idle status')
+
+    for item in data_calls_list:
+        uid = item['uid']
+
+        if item['presence'] == 'open':
+            if uid not in timers:
+                set_timer(uid, timedata)
+        else:
+            if uid in timers:
+                print(f'Clearing timer for user {uid}')
+                timers[uid]['timer'].cancel()
+                del timers[uid]
+
+# Schedule to run the idle status check every 3 seconds
+schedule.every(3).seconds.do(check_idle_status)
+
+# Function to update and print current time and remaining times for each user's timer
+def update_current_time():
+    while True:
+        current_time = datetime.now()
+        print(f'Current time: {current_time}')
+        
+        for uid, data in list(timers.items()):
+            elapsed_time = time.time() - data['start_time']
+            remaining_time = data['idle_time'] - elapsed_time
+            if remaining_time <= 0:
+                print(f'User {uid} has been idle for too long.')
+                del timers[uid]
+            else:
+                print(f'User {uid} remaining time: {remaining_time:.2f} seconds')
+        
+        time.sleep(1)
+
+# Starting a separate thread to update current time and timers
+current_time_thread = threading.Thread(target=update_current_time)
+current_time_thread.daemon = True
+current_time_thread.start()
+
+# Main loop to run scheduled tasks
+while True:
+    schedule.run_pending()
+    time.sleep(1)

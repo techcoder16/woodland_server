@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+enum Role {
+  Admin 
+  User
+  Reseller
+
+
+}
+
+model User {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  usertype String?
+  type         String?
+  email String ? @unique
+  
+  Title     String?  // Remove the @unique if you want to allow duplicates
+  first_name        String ?
+  last_name     String?
+  password String?
+  salutation  String?
+  post_code      String?
+  Adress      String?
+  Town      String?
+
+  Country String?
+  phone_number     Float?
+  fax   Float?
+  date_of_birth DateTime?
+  website String?
+  pager String?
+    birth_place String?
+    nationality String?
+    passport String?
+    accpet_LHA_DWP String?
+    internal_info String?
+
+    
+
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now())
+  
+}

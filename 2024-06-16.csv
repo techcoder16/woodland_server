@@ -1,0 +1,79 @@
+User ID,Agent Name,Total Calls,Total Talk Time,Incoming Total,Incoming Missed,Incoming Avg Per Hour,Incoming  Talk Time,Incoming  Average Talk Time,Incoming Max Talk Time,Incoming Average Ring Time,Outgoing Total,Outgoing Avg Per Hour,Outgoing Unanswered,Outgoing Answered,Outgoing Total Talk Time,Outgoing Avg Talk Time,Outgoing Max Talk Time
+203,Kasia 203 <203> ,21,00:28:27,7,0,30.07,00:13:58,00:01:59,00:04:15,00:00:08,14,58.0,5,9,00:14:29,00:01:02,00:03:31
+204,Martin 204 <204> ,12,00:07:26,3,0,24.22,00:07:26,00:02:28,00:05:19,00:00:16,9,0.8,9,0,00:00:00,00:00:00,00:00:00
+200,Manager 200 <200> ,0,00:00:00,0,0,0,00:00:00,00:00:00,00:00:00,00:00:00,0,0,0,0,00:00:00,00:00:00,00:00:00
+201,Nikolett 201 <201> ,0,00:00:00,0,0,0,00:00:00,00:00:00,00:00:00,00:00:00,0,0,0,0,00:00:00,00:00:00,00:00:00
+202,Serish 202 <202> ,0,00:00:00,0,0,0,00:00:00,00:00:00,00:00:00,00:00:00,0,0,0,0,00:00:00,00:00:00,00:00:00
+--,Total,33,0:35:53,10,0,54.29,0:28:50,0:04:27,0:09:34,0:00:24,23,58.8,14,9,0:14:29,0:01:02,0:03:31
+,,,,,
+,,,,,
+User,Date and Time,Source,Destination,Duration,Direction
+,,,,,
+,SummaryKasia 203 <203> ,,,,,,,,,,,,,,,,
+User ID,Agent Name,Total Calls,Total Talk Time,Incoming Total,Incoming Missed,Incoming Avg Per Hour,Incoming  Talk Time,Incoming  Average Talk Time,Incoming Max Talk Time,Incoming Average Ring Time,Outgoing Total,Outgoing Avg Per Hour,Outgoing Unanswered,Outgoing Answered,Outgoing Total Talk Time,Outgoing Avg Talk Time,Outgoing Max Talk Time
+203,Kasia 203 <203> ,21,00:28:27,7,0,30.07,00:13:58,00:01:59,00:04:15,00:00:08,14,58.0,5,9,00:14:29,00:01:02,00:03:31
+,,,,,
+User,Date and Time,Source,Destination,Duration,Direction
+203,2024-06-21 19:17:56,442380982099,07521521132,00:00:34,Outgoing
+203,2024-06-21 14:58:16,442380982099,07415322851,00:01:53,Outgoing
+203,2024-06-21 14:53:04,07411633339,+441733806883,00:04:19,Incoming
+203,2024-06-21 14:31:41,442380982099,07411633339,00:00:00,Outgoing
+203,2024-06-21 13:48:27,442380982099,01260280290,00:01:48,Outgoing
+203,2024-06-21 12:43:00,442380982099,01260280290,00:03:31,Outgoing
+203,2024-06-21 12:42:42,203,01260280280290,00:00:00,Outgoing
+203,2024-06-19 19:28:26,442380982099,01260288333,00:02:45,Outgoing
+203,2024-06-19 19:14:35,442380982099,01260288333,00:01:12,Outgoing
+203,2024-06-19 18:37:01,02380862570,+441733806883,00:02:09,Incoming
+203,2024-06-18 14:15:03,442380982099,07870619852,00:01:52,Outgoing
+203,2024-06-18 13:48:27,442380982099,07950727228,00:00:00,Outgoing
+203,2024-06-18 13:46:51,442380982099,07729610615,00:00:00,Outgoing
+203,2024-06-18 12:53:56,442380982099,07709575001,00:00:00,Outgoing
+203,2024-06-17 18:14:04,07745703096,+442380982099,00:00:58,Incoming
+203,2024-06-17 18:06:02,442380982099,07745703096,00:00:02,Outgoing
+203,2024-06-17 16:27:42,442380982099,07870619852,00:00:52,Outgoing
+203,2024-06-17 16:00:51,07578181155,+441733806883,00:03:34,Incoming
+203,2024-06-17 15:07:01,07870619852,+442380983370,00:01:15,Incoming
+203,2024-06-17 13:59:41,01489775500,+441274061781,00:01:09,Incoming
+203,2024-06-17 13:30:38,07459245920,+441733806883,00:00:34,Incoming
+,,,,,
+,SummaryMartin 204 <204> ,,,,,,,,,,,,,,,,
+User ID,Agent Name,Total Calls,Total Talk Time,Incoming Total,Incoming Missed,Incoming Avg Per Hour,Incoming  Talk Time,Incoming  Average Talk Time,Incoming Max Talk Time,Incoming Average Ring Time,Outgoing Total,Outgoing Avg Per Hour,Outgoing Unanswered,Outgoing Answered,Outgoing Total Talk Time,Outgoing Avg Talk Time,Outgoing Max Talk Time
+204,Martin 204 <204> ,12,00:07:26,3,0,24.22,00:07:26,00:02:28,00:05:19,00:00:16,9,0.8,9,0,00:00:00,00:00:00,00:00:00
+,,,,,
+User,Date and Time,Source,Destination,Duration,Direction
+204,2024-06-21 17:09:42,01489775500,+442380983370,00:00:43,Incoming
+204,2024-06-21 16:32:22,204,+31187607891,00:00:00,Outgoing
+204,2024-06-21 16:30:41,204,+31187607891,00:00:00,Outgoing
+204,2024-06-21 16:30:35,204,+31187607891,00:00:00,Outgoing
+204,2024-06-21 16:29:31,204,+31187607891,00:00:00,Outgoing
+204,2024-06-21 16:29:28,204,+31187607891,00:00:00,Outgoing
+204,2024-06-21 16:28:51,204,+31187607891,00:00:00,Outgoing
+204,2024-06-21 16:28:38,204,+31187607891,00:00:00,Outgoing
+204,2024-06-21 16:28:30,204,+31187607891,00:00:00,Outgoing
+204,2024-06-21 16:28:12,204,+31187607891,00:00:00,Outgoing
+204,2024-06-19 19:08:36,01260288333,+441733806883,00:01:14,Incoming
+204,2024-06-17 15:14:45,07870619852,+442380983370,00:05:29,Incoming
+,,,,,
+,SummaryManager 200 <200> ,,,,,,,,,,,,,,,,
+User ID,Agent Name,Total Calls,Total Talk Time,Incoming Total,Incoming Missed,Incoming Avg Per Hour,Incoming  Talk Time,Incoming  Average Talk Time,Incoming Max Talk Time,Incoming Average Ring Time,Outgoing Total,Outgoing Avg Per Hour,Outgoing Unanswered,Outgoing Answered,Outgoing Total Talk Time,Outgoing Avg Talk Time,Outgoing Max Talk Time
+200,Manager 200 <200> ,0,00:00:00,0,0,0,00:00:00,00:00:00,00:00:00,00:00:00,0,0,0,0,00:00:00,00:00:00,00:00:00
+,,,,,
+User,Date and Time,Source,Destination,Duration,Direction
+,,,,,
+,SummaryNikolett 201 <201> ,,,,,,,,,,,,,,,,
+User ID,Agent Name,Total Calls,Total Talk Time,Incoming Total,Incoming Missed,Incoming Avg Per Hour,Incoming  Talk Time,Incoming  Average Talk Time,Incoming Max Talk Time,Incoming Average Ring Time,Outgoing Total,Outgoing Avg Per Hour,Outgoing Unanswered,Outgoing Answered,Outgoing Total Talk Time,Outgoing Avg Talk Time,Outgoing Max Talk Time
+201,Nikolett 201 <201> ,0,00:00:00,0,0,0,00:00:00,00:00:00,00:00:00,00:00:00,0,0,0,0,00:00:00,00:00:00,00:00:00
+,,,,,
+User,Date and Time,Source,Destination,Duration,Direction
+,,,,,
+,SummarySerish 202 <202> ,,,,,,,,,,,,,,,,
+User ID,Agent Name,Total Calls,Total Talk Time,Incoming Total,Incoming Missed,Incoming Avg Per Hour,Incoming  Talk Time,Incoming  Average Talk Time,Incoming Max Talk Time,Incoming Average Ring Time,Outgoing Total,Outgoing Avg Per Hour,Outgoing Unanswered,Outgoing Answered,Outgoing Total Talk Time,Outgoing Avg Talk Time,Outgoing Max Talk Time
+202,Serish 202 <202> ,0,00:00:00,0,0,0,00:00:00,00:00:00,00:00:00,00:00:00,0,0,0,0,00:00:00,00:00:00,00:00:00
+,,,,,
+User,Date and Time,Source,Destination,Duration,Direction
+,,,,,
+,SummaryTotal,,,,,,,,,,,,,,,,
+User ID,Agent Name,Total Calls,Total Talk Time,Incoming Total,Incoming Missed,Incoming Avg Per Hour,Incoming  Talk Time,Incoming  Average Talk Time,Incoming Max Talk Time,Incoming Average Ring Time,Outgoing Total,Outgoing Avg Per Hour,Outgoing Unanswered,Outgoing Answered,Outgoing Total Talk Time,Outgoing Avg Talk Time,Outgoing Max Talk Time
+--,Total,33,0:35:53,10,0,54.29,0:28:50,0:04:27,0:09:34,0:00:24,23,58.8,14,9,0:14:29,0:01:02,0:03:31
+,,,,,
+User,Date and Time,Source,Destination,Duration,Direction

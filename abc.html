@@ -1,0 +1,720 @@
+
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=utf-8" />
+<meta name="robots" content="noindex">
+    <!--GOOGLE ANALYTICS-->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-97865765-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-97865765-1');
+</script>
+    <!--GOOGLE ANALYTICS-->
+        <title>
+    Manager Portal - Resellers    </title>
+
+        <link rel="shortcut icon" type="image/x-icon" href="https://sb.xinix.co.uk/ns-api/?object=image&action=read&filename=favicon.gif&server=sb.xinix.co.uk&territory=XINIX_PBX&domain=XINIXWORLD" />
+    <link rel="icon" type="image/x-icon" href="https://sb.xinix.co.uk/ns-api/?object=image&action=read&filename=favicon.gif&server=sb.xinix.co.uk&territory=XINIX_PBX&domain=XINIXWORLD" />
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/portal/css/basicCSS.php?version=1718297942&ver=44.1.3  " type="text/css">
+    <link rel="stylesheet" href="/portal/css/portal.php?ver=4413 &background=%23eeefe9&primary1=%23035B94&primary2=%23034383&bar1=%23035B94&bar2=%23034383" type="text/css">
+            <script type="text/javascript">
+
+
+        if (location.pathname.length > 85 && (
+            location.pathname.indexOf('portal/home/index') > 0 || 
+            location.pathname.indexOf('portal/agents/index/') > 0 || 
+            location.pathname.indexOf('portal/agents/index/') > 0 
+            )
+        )
+        {
+            //This logic will prevent the url from getting the tokens viewable. 
+            const pathArray = location.pathname.split('/');
+            const newPath = pathArray.slice(0, 4).join('/')+"?uiconfig=reset";
+            window.location = window.location.origin+newPath;
+        }
+
+        if (location.pathname.length > 10 && (location.pathname.indexOf('portal/home') > 0 ))
+        {
+            if (location.search && location.search.includes('a=') && location.search.includes('c='))
+            {
+                //This logic will prevent the url from getting the tokens viewable. 
+                const pathArray = location.pathname.split('/');
+                const newPath = pathArray.slice(0, 4).join('/')+"?uiconfig=reset";
+                window.location = window.location.origin+newPath;
+            }
+        }
+
+        /* css and styles */
+        var cssPrimary1 = '#035B94';
+        var cssPrimary2 = '#034383';
+        var faviconUrl = 'https://sb.xinix.co.uk/ns-api/?object=image&action=read&filename=favicon.gif&server=sb.xinix.co.uk&territory=XINIX_PBX&domain=XINIXWORLD';
+        var SNAPmobileWebName ='Web Phone';
+        var SNAPmobileWebenabled = true;
+
+        /* user and session info */
+        var message_sessions = [{"Messagesession":[]}];
+        var current_domain = "XINIXWORLD"; //will always be the currently viewed domain
+        var sub_domain = 'XINIXWORLD'; //might not always be the currently viewed domain
+        var sub_user = "220";
+        var sub_reseller = "XINIX_PBX";
+        var sub_scope = "Super User";
+                var sub_site = null;
+                  var scope_mode = "admin";
+        var omp_level = "navigation_reseller";
+        var sub_email = "abbasi.work22@gmail.com";
+        var sub_name = "Furqan ali";
+        var sub_time_zone = "Europe\/London";
+        var custom_greetings = [];
+        custom_greetings[1]= '';
+        custom_greetings[2]= '';
+        custom_greetings[3]= '';
+        custom_greetings[4]= '';
+        custom_greetings[5]= '';
+        custom_greetings[6]= '';
+        custom_greetings[7]= '';
+        custom_greetings[8]= '';
+        custom_greetings[9]= '';
+        custom_greetings[10]= '';
+        var sub_uri = '220@XINIXWORLD';
+        var server_name = 'sb.xinix.co.uk';
+        var range_interval = '-1 HOUR';
+        var servertime = '2024-07-10 18:11:15';
+
+        var colorArray = ["#396AB1","#DA7C30","#3E9651","#CC2529","#535154","#6B4C9A","#922428","#948B3D"];
+
+        /* uc features config */
+        var enableScreenShare = false;
+        var enableChatUC = true;
+        var enableChatSMS = false;
+        var enableVideo = true;
+        var isWebrtc = true;
+        var videoUrl = "video"; //doesn't seem to be used?
+        var smsnumbers = [];
+        var mmsnumbers = "";
+        var groupMmsNumbers = "";
+        var video_id = 895005138 // '123456789';
+        var web_phone_postfix = 'wp';
+        var shareUrl = '';
+
+        /* portal features config */
+        var PORTAL_AGENT_SCREEN_POP_URL = '';
+
+        var PORTAL_PHONENUMBER_REMOVE_PLUS_ON_CALL = true;
+
+        var PORTAL_HTML5_NOTIFICATIONS = true;
+        var PORTAL_PHONENUMBER_HIDE_DOMESTIC_ONE = false;
+        var PORTAL_PHONENUMBER_REMOVE_POUND_PREFIXES = true;
+
+        var PORTAL_WEBPHONE_NEW_TAB_VIEW = true;
+        var PORTAL_CLICK_TO_CALL_USE_AUTO = false;
+        var PORTAL_HOME_OMP_SHOW_MEETING = true;
+        var PORTAL_VIDEO_NAME = 'SNAP.HD';
+        var max_days = 31;
+        var popup_calls_enabled = true;
+        var popup_allow_complete = false;
+        var popup_show_notes = false;
+        var hideInboundConferencePopups = true;
+        var recordCallButton = true;
+        var notesClear = false;
+        var portalDateFormat = 'MM/DD/YYYY';
+        var portalTimeFormat = 'h:mm a';
+
+        var PORTAL_CRADLE_TO_GRAVE_FEATURE_NAME = 'Cradle To Grave';
+
+        var PORTAL_CALLHISTORY_RECORDING_PRELOAD = 'none';
+        var rootPath = '/portal';
+        var preferMP4 = false;
+        var reversContactLookup = {};
+        var PORTAL_LOCALIZATION_NUMBER_FORMAT = 'GB';
+        var PORTAL_PHONENUMBER_US_DOMESTIC = 'no';
+        var PORTAL_INVENTORY_ALLOW_PLUS_SMS_NUMBER = 'no';
+        var PORTAL_CALL_QUEUE_AGENT_SHOW_STATUS_COL = 'no' == 'yes';
+    </script>
+    <script type="text/javascript" src="/portal/locale/en_gb/LC_MESSAGES/i18nJS.js"></script>
+
+            <script type="text/javascript" src="/portal/js/basicJS.php?version=1718297942&ver=44.1.3 "></script>
+    
+        <script type="text/javascript" src="/portal/locale/datepicker_i18n/datepicker-en-GB.js"></script>
+    <script type="text/javascript" src="/portal/locale/moment_locales/en-gb.js"></script>
+    <script type="text/javascript">
+      $.datepicker.setDefaults($.datepicker.regional['en-GB']);
+    </script>
+    
+
+
+    <script type="text/javascript">
+        const TOKEN_LS_KEY = 'ns_t';
+        localStorage.setItem(TOKEN_LS_KEY, "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJucyIsImV4cCI6MTcyMDcxOTE3MSwiaWF0IjoxNzIwNjMyNzcxLCJpc3MiOiJzYi54aW5peC5jby51ayIsImp0aSI6Ijk1OTJiMGZlZGZlY2VlNmVjZTg2OGVlNTBkYzFjYjExOTEzNDllNGEiLCJzdWIiOiIyMjBAWElOSVhXT1JMRCIsInRpbWVfb3V0Ijo4NjQwMDAwMCwiZG9tYWluIjoiWElOSVhXT1JMRCIsInRlcnJpdG9yeSI6IlhJTklYX1BCWCIsInVzZXIiOiIyMjAiLCJ1c2VyX2VtYWlsIjoiYWJiYXNpLndvcmsyMkBnbWFpbC5jb20iLCJ1c2VyX3Njb3BlIjoiU3VwZXIgVXNlciIsImRpc3BsYXlOYW1lIjoiRnVycWFuIGFsaSIsIm1hc2tfY2hhaW4iOm51bGwsImxvZ2luIjoiMjIwQFhJTklYV09STEQifQ.vbQ5lsJXcjiBhN-KxR7DT5l7nOq7rMh5DUznC4D6yYY");
+    </script>
+
+        <script type="text/javascript" src="/portal/js/callcenterJS.php?version=1718297942&ver=39.0.4 "></script>
+    <script type="text/javascript">
+        /** CALL CENTER SPECIFIC GLOBALS WHYYYYYYY **/
+        var enableExportCSV = true;        var enableExportPDF = false;        var ccgraphsHAxis = {textPosition:'none'};
+        var ccgraphsHAxisReport = {textStyle:{fontSize: 11}, textPosition:'out',slantedText:false,maxTextLines:1,maxAlternation:1};
+    </script>
+    <script type="text/javascript" src="/portal/js/selectivity-full.js"></script>
+<link rel="stylesheet" href="/portal/css/selectivity-full.css" type="text/css">
+    
+    <script type="text/javascript" src="/portal/cjs/socket-chat.js?ver=44.1.3 "></script>
+    <script type="text/javascript" src="/portal/cjs/socket-image.js"></script>
+    <script type="text/javascript" src="/portal/cjs/emoji-chat.js"></script>
+    
+    
+    
+    <script type="text/javascript">
+                netsapiens.autocomplete.setResellerList({"NetSapiens":"NetSapiens Inc.","SIPDESK":"DEMO","TrialAccount":"Reseller for 14 Days Trial Accounts","XINIX_PBX":"TEST"});
+        /** socket.io setup and subscriptions **/
+try {
+    //io.enable('browser client minification');
+    //io.enable('browser client etag');
+    //io.enable('browser client gzip');
+    var socket_urls_index = 0;
+    var socket_urls = ["sb.xinix.co.uk:8001"];
+    function reconnectSocket(){
+      socket = null;
+      socket_urls_index = socket_urls_index+1;
+      if (!socket_urls[socket_urls_index])
+        socket_urls_index = 0;
+      setTimeout(connectSocket(socket_urls_index),500);
+    }
+    var socket = null;
+    var subscriptions = [];
+    var authid = 'portalwebrootresellers1720635075220';
+
+    function connectSocket(index){
+      socket = io.connect("https://" +socket_urls[socket_urls_index], {
+          secure: true,
+          transports: ['websocket'],
+          pingInterval: 1000 * 25,
+          pingTimeout: 1000 * 26,
+          reconnection: false
+      });
+
+      socket.on('connect', function() {
+        console.log('...socket connect()');
+        for (var i = 0; i < subscriptions.length; i++) {
+          if (i>8) return; //hack for too many logged subscriptions;
+          if (typeof window.localStorage.ns_ts != 'undefined')
+            subscriptions[i].bearer = window.localStorage.ns_ts
+          socket.emit('subscribe', subscriptions[i]);
+        }
+      });
+
+      socket.on("disconnect", () => {
+        console.log('...socket disconnect');
+        reconnectSocket();
+
+      });
+
+      socket.on("connect_error", () => {
+        console.log('...socket connect_error');
+        reconnectSocket();
+
+      });
+
+      socket.on('reconnect', function() {
+          
+          for (var i = 0; i < subscriptions.length; i++) {
+            if (i>8)
+              return; //hack for too many logged subscriptions;
+              if (typeof window.localStorage.ns_ts != 'undefined')
+                subscriptions[i].bearer = window.localStorage.ns_ts
+              socket.emit('subscribe', subscriptions[i]);
+
+          }
+      });
+
+    }
+
+    connectSocket(socket_urls_index);
+
+    if(enableChatUC || enableChatSMS) {
+        //subscribe to all the socket goodies for chat
+        sGetUcChatData(sub_domain, sub_user);
+        if(enableChatUC)
+            sGetOldChatData();
+    }
+    sGetVoicemailData(sub_domain, sub_user);
+
+
+
+
+
+} catch (e) {};
+</script>
+    <meta name="google-translate-customization" content="ecd0a757160343b9-691bbad29429d44e-g714e11a4e3a1889a-1a"></meta>
+</head>
+<body class="">
+<div class="fixed-container">
+    
+            <div id="flashContainer"></div>
+</div>
+
+
+<div class="page-container">
+    <div id="write-domain" class="modal hide fade">
+        <div class="loading-container relative" style="top:0;padding: 50px 0;">
+            <div class="loading-spinner la-ball-spin-clockwise">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <div id="snaptelco" class="modal hide fade">
+    <div class="loading-container relative" style="top:0;padding: 50px 0;">
+        <div class="loading-spinner la-ball-spin-clockwise">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    </div>
+    <div class="dock-overlay">
+        <div class="dock-overlay-inner dock-popup-overlay">
+        </div>
+        <div class="dock-overlay-inner dock-contacts-overlay">
+                                                <div class="dock-column dock-contacts">
+                <div class="dock-column-inner">
+                                        <div class="dock-popup">
+                        <div class="dock-head">
+                            
+
+                            <div class="dock-head-title">
+                                <span class="dock-name">Contacts</span>
+                            </div>
+                            <div class="dock-head-buttons">
+                                <button class="dock-minimize dock-head-button" title="Minimise"><i class="icon-maximize icon-white"></i></button>
+                                <button class="dock-popout dock-head-button" title="Popout" onclick="openContactsPopoutWindow();return false;"><i class="icon-share-alt icon-white"></i></button>
+                            </div>
+                            
+
+
+                        </div>
+
+                        <div class="dock-body hide">
+
+                        </div>
+
+                    </div>
+                                    </div>
+            </div>
+                                </div>
+    </div> <!-- /dock-overlay -->
+
+
+    <div id="user-profile" class="modal hide fade">
+           <div class="loading-container relative" style="top:0;padding: 50px 0;">
+                <div class="loading-spinner la-ball-spin-clockwise">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+    </div>
+
+    <div class="wrapper ">
+        <div id="header">
+            
+                        <div id="header-logo">
+
+                                <img src="https://sb.xinix.co.uk/ns-api/?object=image&action=read&filename=portal_main_top_left.png&server=sb.xinix.co.uk&territory=XINIX_PBX&domain=XINIXWORLD" />
+            </div>
+            
+            
+            <div id="header-user">
+
+                <!-- new user toolbar WIP -->
+                <ul class="user-toolbar">
+                    <li><span class="dropdown language-dropdown"><i class="icon icon-th"></i> <a class="dropdown-toggle" data-toggle="dropdown">Apps<i class="caret"></i></a><ul id="app-menu-list" class="dropdown-menu" role="menu"><li><a  target="_blank"  href="/portal">User Portal</a></li><li><a  target="_blank"  href="/portal/attendant">Attendant Console</a></li><li><a href="javascript:launchWebPhone();">Web Phone</a></li><li><a  target="_blank"  href="/video">SNAP.HD</a></li><li><a  target="_blank"  href="/analytics">SNAPanalytics</a></li></ul></span></li><li><span class="dropdown language-dropdown"><i class="nsicon nsicon-language"></i> <a class="dropdown-toggle" data-toggle="dropdown">English<i class="caret"></i></a><ul class="dropdown-menu" role="menu"><li><a href="/portal/localizations/setLanguage/en_gb">English-British (English-British)</a></li><li><a href="/portal/localizations/setLanguage/en_us">English-United States (English-United States)</a></li><li><a href="/portal/localizations/setLanguage/es_mx">Español-Mexico (Spanish-Mexico)</a></li><li><a href="/portal/localizations/setLanguage/fr_ca">Français-Canada (French-Canada)</a></li></ul></span></li>
+                    <li class="dropdown">
+                        <i class='nsicon nsicon-user'></i>
+                        <span class="dropdown-msg-count badge badge-important hide">0</span>
+                        <a class="dropdown-toggle account-dropdown" data-toggle="dropdown">Furqan ali (220)<i class="caret"></i></a>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li><a href="/portal/login/touser" class="header-link" id="Link">My Account</a></li><li><a href="/portal/login/touser/voicemails" class="header-link" id="Link">Messages <span class="dropdown-msg-count badge badge-important hide">0</span></a></li><li class='divider'></li><li><a href="/portal/login/logout" id="logout" onclick="removeLocalStorageItems();" data-loading-text="Logging out...">Log Out</a></li>                        </ul>
+                    </li>
+
+                </ul>
+                <!-- /end user-toolbar -->
+            </div>
+                                    <div id="navigation">
+                <ul id="nav-buttons">
+                    <li id="nav-home-super" class=""><a href="/portal/home" class="nav-link" id="LinkHomeIndex"><div class="nav-button btn"></div><div class="nav-bg-image"></div><span class="nav-text">Home</span><div class="nav-arrow"></div></a></li><li id="nav-resellers" class=" nav-link-current"><a href="/portal/resellers" class="nav-link" id="LinkResellersIndex"><div class="nav-button btn"></div><div class="nav-bg-image"></div><span class="nav-text">Resellers</span><div class="nav-arrow"></div></a></li><li id="nav-domains" class=""><a href="/portal/domains" class="nav-link" id="LinkDomainsIndex"><div class="nav-button btn"></div><div class="nav-bg-image"></div><span class="nav-text">Domains</span><div class="nav-arrow"></div></a></li><li id="nav-siptrunks" class=""><a href="/portal/siptrunks" class="nav-link" id="LinkSiptrunksIndex"><div class="nav-button btn"></div><div class="nav-bg-image"></div><span class="nav-text">SIP Trunks</span><div class="nav-arrow"></div></a></li><li id="nav-routeprofiles" class=""><a href="/portal/routeprofiles" class="nav-link" id="LinkRouteprofilesIndex"><div class="nav-button btn"></div><div class="nav-bg-image"></div><span class="nav-text">Route Profiles</span><div class="nav-arrow"></div></a></li><li id="nav-inventory" class=""><a href="/portal/inventory" class="nav-link" id="LinkInventoryIndex"><div class="nav-button btn"></div><div class="nav-bg-image"></div><span class="nav-text">Inventory</span><div class="nav-arrow"></div></a></li><li id="nav-callhistory" class=""><a href="/portal/callhistory" class="nav-link" id="LinkCallhistoryIndex"><div class="nav-button btn"></div><div class="nav-bg-image"></div><span class="nav-text">Call History</span><div class="nav-arrow"></div></a></li><li id="nav-uiconfigs" class=""><a href="/portal/uiconfigs" class="nav-link" id="LinkUiconfigsIndex"><div class="nav-button btn"></div><div class="nav-bg-image"></div><span class="nav-text">Platform Settings</span><div class="nav-arrow"></div></a></li>                </ul>
+            </div>
+            <div id="navigation-subbar">
+                <a href="/portal/resellers" class="navigation-title" id="LinkResellersIndex">Resellers</a>
+                <a id="pageRefresh" href="#" class="btn subbar-btn helpsy" title="Refresh"><i class="icon-refresh"></i></a>
+
+                
+            </div>
+        </div>
+
+        <div id="content">
+            <div id="write-reseller" class="modal hide fade">
+    <div class="loading-container relative" style="top:0;padding: 50px 0;">
+        <div class="loading-spinner la-ball-spin-clockwise">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+
+<div class="action-container-left">
+    <form class="form-search">
+        <div class="input-append">
+            <input name="data[filter]" type="text" id="resellers" placeholder="Enter a reseller name or description" class="search-query" />            <button class="btn" disabled><i class="icon-search"></i></button>
+        </div>
+        &nbsp;    </form>
+</div>
+
+<div class="action-container-right">
+    <button class="btn helpsy color-primary" onclick="loadModal(&quot;#write-reseller&quot;, &quot;/portal/resellers/add&quot;)" data-target="#write-reseller" data-toggle="modal" data-backdrop="static" id="ButtonAddResellerWriteReseller">Add Reseller</button></div>
+
+<div class="domains-panel-main">
+<div class="table-container"><table class="table table-condensed table-hover"><colgroup><col class="col1"><col class="col2"><col class="col3"><col class="col4"><col class="col5"></colgroup><thead><tr><th><a href="/portal/resellers/index/page:1/sort:territory/direction:desc" class="asc">Name</a></th> <th><a href="/portal/resellers/index/page:1/sort:description/direction:asc">Description</a></th> <th>Domains</th> <th>Users</th> <th>Active Calls</th> <th>&nbsp;</th></tr></thead><tr><td>NetSapiens</td> <td>NetSapiens Inc.</td> <td><a href="/portal/domains/index/null/NetSapiens" class="helpsy-right" title="View Domains" id="LinkDomainsIndexNullNetSapiens">3</a></td> <td>12</td> <td>0</td> <td class="action-buttons"><a href="/portal/resellers/edit/NetSapiens" class="edit helpsy" title="Edit" onclick="loadModal(&quot;#write-reseller&quot;, $(this).attr(&quot;href&quot;))" data-target="#write-reseller" data-toggle="modal" data-backdrop="static" id="LinkEditNetSapiens"></a>&nbsp;<a href="javascript:void(0);" class="delete helpsy disabled" title="Must have only 0 domains to remove" id="Link">Delete</a></td></tr><tr><td>SIPDESK</td> <td>DEMO</td> <td><a href="/portal/domains/index/null/SIPDESK" class="helpsy-right" title="View Domains" id="LinkDomainsIndexNullSIPDESK">1</a></td> <td>1</td> <td>0</td> <td class="action-buttons"><a href="/portal/resellers/edit/SIPDESK" class="edit helpsy" title="Edit" onclick="loadModal(&quot;#write-reseller&quot;, $(this).attr(&quot;href&quot;))" data-target="#write-reseller" data-toggle="modal" data-backdrop="static" id="LinkEditSIPDESK"></a>&nbsp;<a href="javascript:void(0);" class="delete helpsy disabled" title="Must have only 0 domains to remove" id="Link">Delete</a></td></tr><tr><td>TrialAccount</td> <td>Reseller for 14 Days Trial Accounts</td> <td><a href="/portal/domains/index/null/TrialAccount" class="helpsy-right" title="View Domains" id="LinkDomainsIndexNullTrialAccount">81</a></td> <td>86</td> <td>0</td> <td class="action-buttons"><a href="/portal/resellers/edit/TrialAccount" class="edit helpsy" title="Edit" onclick="loadModal(&quot;#write-reseller&quot;, $(this).attr(&quot;href&quot;))" data-target="#write-reseller" data-toggle="modal" data-backdrop="static" id="LinkEditTrialAccount"></a>&nbsp;<a href="javascript:void(0);" class="delete helpsy disabled" title="Must have only 0 domains to remove" id="Link">Delete</a></td></tr><tr><td>XINIX_PBX</td> <td>TEST</td> <td><a href="/portal/domains/index/null/XINIX_PBX" class="helpsy-right" title="View Domains" id="LinkDomainsIndexNullXINIXPBX">4</a></td> <td>29</td> <td>0</td> <td class="action-buttons"><a href="/portal/resellers/edit/XINIX_PBX" class="edit helpsy" title="Edit" onclick="loadModal(&quot;#write-reseller&quot;, $(this).attr(&quot;href&quot;))" data-target="#write-reseller" data-toggle="modal" data-backdrop="static" id="LinkEditXINIXPBX"></a>&nbsp;<a href="javascript:void(0);" class="delete helpsy disabled" title="Must have only 0 domains to remove" id="Link">Delete</a></td></tr></table></div>
+</div>
+
+<script type="text/javascript">
+
+    $('ul.dropdown-menu, tr').bind('mouseleave',function(){
+            $('.dropdown').removeClass('open');
+    });
+
+</script>
+        </div>
+            </div> <!-- /wrapper -->
+        <div id="footer">
+                <p>Xinix | Connecting Businesses</p>
+                
+
+        <p>Manager Portal:  44.1.3 </p>
+            </div>
+    
+    <!-- javascript debug console toggle -->
+    <!-- <a id="js-debug-btn"><i class="icon-eye-open"></i></a> -->
+
+    <!-- majority of javascript at bottom so the page displays faster -->
+    <script type="text/javascript">
+//<![CDATA[
+$(document).ready(function () {$(function() {resellersChoices = [{ id: "NetSapiens", value: "NetSapiens (NetSapiens Inc.)"},{ id: "SIPDESK", value: "SIPDESK (DEMO)"},{ id: "TrialAccount", value: "TrialAccount (Reseller for 14 Days Trial Accounts)"},{ id: "XINIX_PBX", value: "XINIX_PBX (TEST)"},];$("#resellers").attr("spellcheck",false);$("#resellers").autocomplete({autoFocus: true,minLength: 0,source: function (request, response) {var results = $.ui.autocomplete.filter(resellersChoices, request.term);if (!results.length) {$("#resellers").validationEngine("showPrompt",_("* No matches found!"), "red", "bottomLeft", true);} else {$("#resellers").validationEngine("hidePrompt");}response(results);},select: function(event, ui) {window.location.href = "/portal/resellers/index/"+ui.item.id+"/"+ui.item.value.substr(ui.item.value.indexOf(" ")).trim().replace("/","FRWDSLASH").replace("/","FRWDSLASH").replace("/","FRWDSLASH").replace("/","FRWDSLASH");}});});});
+//]]>
+</script>    <style>
+        .flashMessage {
+            height: 20px;
+            text-align: left;
+        }
+        .loading-spinner {
+            top: 2px;
+        }
+        .flashMsgContainer {
+            font-weight: bold;
+            display: inline;
+            opacity: 0;
+        }
+        .flashMsgContainer span {
+            font-weight: normal;
+            opacity: 0;
+        }
+        .download-glyph i {
+            opacity: 0;
+            top: -10px;
+            position: relative;
+        }
+    </style>
+
+    <script type="text/javascript">
+    </script>
+
+    <style>
+        #flashContainer {
+            text-align: center;
+        }
+        .flashMessage {
+            min-height: 20px;
+            height: auto;
+            display: inline-block;
+            text-align: left;
+            clear: both;
+        }
+        .loading-spinner {
+            top: 2px;
+        }
+        .flashMsgContainer {
+            font-weight: bold;
+            display: none;
+            opacity: 0;
+        }
+        .flashMsgContainer span {
+            font-weight: normal;
+            opacity: 0;
+        }
+        .download-glyph i {
+            opacity: 0;
+            top: -10px;
+            position: relative;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+    var last_clicked; // tracks the last clicked window element
+
+    $(function() {
+
+        window.onclick = function(e) {
+            last_clicked = e.target;
+            if( last_clicked.dataset.toggle == "confirmation" ) last_clicked = undefined;
+            return true;
+        }
+
+        window.onbeforeunload = function(event) {
+            setTimeout( function() { // wrap in timeout so interaction events (clicks) resolves first [firefox OoO]
+                if( typeof(last_clicked) !== 'undefined' ) { // if there was a last_clicked target that triggered the unload
+                    if( typeof(last_clicked.href) !== 'undefined' && (last_clicked.href.substr(-3) == 'csv' || last_clicked.href.includes('/csv'))) // if it was a csv link
+                        flashDownloader();
+                    else if(last_clicked.localName =="i" &&  typeof(last_clicked.parentElement) !== 'undefined' && typeof(last_clicked.parentElement.href) !== 'undefined' && (last_clicked.parentElement.href.substr(-3) == 'csv' || last_clicked.parentElement.href.includes('/csv'))) // if it was a csv link
+                        flashDownloader(); //this case handles the icon being clicked.
+                    else if( $(last_clicked).data('download-path') ) // if it was a file download btn
+                        flashDownloader();
+                    else if( $(last_clicked).hasClass('download-audio') ) // if it was a audio download btn
+                        flashDownloader();
+                    else
+                        activateLoadMsg();
+                }
+                else
+                    activateLoadMsg();
+            }, 1);
+        }
+
+        $('.nav-link').click( function() {
+            var clickedItem = $(this);
+            if( !clickedItem.parent().hasClass('nav-link-current') ) {
+                $('#nav-buttons .loading').removeClass('loading');
+                clickedItem.parent().addClass('loading');
+                $('.nav-arrow').css('opacity',0);
+
+                $('.nav-arrow').animate({opacity: 0}, 125);
+                clickedItem.find('.nav-arrow').animate({opacity: 1}, 125);
+                //activateLoadMsg();
+            } else {
+                activateLoadMsg(true);
+            }
+        });
+
+        $('#pageRefresh').click( function() {
+            window.location.reload();
+        });;
+
+        getCount(); //get messages count and update badges
+
+        setInterval(function(){
+            //getCount();
+        }, 302000);
+
+        dockHeight();//adjust dock overlay and columns on load
+
+        setTimeout(function (){
+            checkSession();
+        }, 180000);
+
+        // no longer used?
+        // $('.chat-message-box').on("keyup", function(e) {
+        //
+        //     if (e.which == 13) {
+        //         $(this).next().trigger("click");
+        //     }
+        // });
+
+        
+                if ('domain' != '220')
+            sGetCallsData('user', sub_domain, '220');
+        
+
+        
+        let dockHide = localStorage.getItem('DockPosition');
+        if (dockHide == 'hidden') {
+            $(".dock-body").hide();
+        }
+
+        $.get('/portal/contacts/dock/', function(data) {
+            try {
+                $('.dock-contacts .dock-body').html(data);
+                contactsResize();
+                $(document).ready(function () {
+                    setTimeout(function () {
+                        var allChats = JSON.parse(localStorage.getItem('openChats'))
+                        if (allChats) {
+                            for (var i = 0; i < allChats.length; i++) {
+                                sendPrivateMessage(allChats[i].user, allChats[i].name, true, allChats[i].smsNumber, allChats[i].session_id);
+                            }
+                            if (dockHide == 'hidden') {
+                                $(".dock-body").hide();
+                            } else {
+                                localStorage.setItem('DockPosition', 'show');
+                                $(".dock-body").show();
+                                dockHeight();
+                                contactsResize();
+                            }
+                        }
+                    }, 500);
+                });
+            } catch (err) {
+                debugger;
+                log("error caught - " + err);
+                log(data);
+            }
+            //  initTooltips();
+
+        });
+        
+});
+
+    //adjust dock overlay and columns on window resize and scroll
+    $(window).resize(function() {
+        dockHeight();
+        contactsResize();
+        checkPopupWidth();
+    });
+    $(window).scroll(function() {
+        dockHeight();
+        contactsResize();
+    });
+
+    //hides or shows dock body based on visibility
+    $(document).on('click', '.dock-head-title', function() {
+        minimizeDockPopup(this);
+    });
+
+    //hides or shows dock body based on visibility
+    $(document).on('click', '.dock-minimize', function() {
+        minimizeDockPopup(this);
+    });
+
+    //close dock popup
+    $(document).on('click', '.dock-close', function() {
+        $(this).parents('.dock-column').remove();
+        $('.dock-popup-overlay .dock-column:hidden').first().show();
+    });
+
+
+    const httpDelete = (url, callback, err = console.error,token ) => {
+        const request = new XMLHttpRequest();
+        request.open('DELETE', url, true);
+        request.setRequestHeader("Authorization", "Bearer"+" " + token);
+        request.onload = () => callback(request);
+        request.onerror = () => err(request);
+        request.send();
+    };
+
+    function removeLocalStorageItems() {
+        
+        var token = localStorage.getItem("ns_t");
+        if (token)
+            httpDelete('/ns-api/v2/jwt', function() {},console.error,token );
+        localStorage.removeItem("ns_t");
+        localStorage.removeItem("hiddenChatBoxes");
+        localStorage.removeItem("DockPosition");
+        localStorage.removeItem("user_cols_curr_data");
+        localStorage.removeItem("user_cols");
+    }
+
+    function activateLoadMsg(refresh) {
+        setTimeout( function() { // wrap in timeout so activation event resolves first
+            var loaderHtml = '<div style="float: right;"><div class="loading-spinner la-ball-spin-clockwise la-sm" style="color: inherit;"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>';
+            //var closeBtn = '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+            if( $('.loader-flash').length === 0 ) {
+                var loadingMsg = _('Loading')+'...';
+                var waitMsg = "Please wait"+'...';
+
+                if( typeof(last_clicked) !== 'undefined')
+                    if( $(last_clicked).data('loading-text') ) {
+                        loadingMsg = $(last_clicked).data('loading-text');
+                    }
+                jsFlash(loaderHtml+"<div class='flashMsgContainer loader-flash' style='opacity: 0'>"+loadingMsg+" <span>"+waitMsg+"</span></div>","info",999999, function() {
+                    $('.flashMessage.new').css({width:'17px'}).animate({opacity: 1},250);
+                    last_clicked = undefined;
+                    animateFlashMessage( ( loadingMsg.length + waitMsg.length ) * 8); // calc width of msg for expand anim
+                });
+            } else {
+                $('.loader-flash').animate({opacity: 1},250); // only get here if a new load state is caused before previous load anim completes
+            }
+        }, 1);
+    }
+
+    function deactivateLoadMsg() {
+        $('.loader-flash').animate({opacity: 0},250,'easeInOutQuart', function() {
+            $(this).animate({width:17},250);
+            $(this).parent().animate({opacity:0},600,'linear',function() {
+                $(this).remove();
+                $(this).parent().remove();
+            });
+        });
+    }
+
+    function animateFlashMessage( width ) {
+        setTimeout( function() {
+            var newMsg = $('.flashMessage.new');
+            var newMsgTxt = $('.flashMessage.new .flashMsgContainer');
+            newMsg.removeClass('new').animate({opacity: 1, width: width},500,'easeInOutQuart', function() {
+                newMsgTxt.css('display','inline-block').animate({opacity:1},600);
+                newMsgTxt.find('span').animate({opacity:1},1000);
+            });
+        }, 1500);
+    }
+
+    function flashDownloader() {
+        var dlGlyphHtml = '<div style="float: right;"><div class="download-glyph"><i class="fa fa-download fa-lg" aria-hidden="true"></i></div></div>';
+        var waitMsg = "Please wait"+'...';
+        var downloadMsg = "Downloading"+'...';
+
+        jsFlash(dlGlyphHtml+"<div class='flashMsgContainer'>"+downloadMsg+"<span> "+waitMsg+"</span></div>","info", 6000, function() {
+            $('.flashMessage.new').css({width:'17px'}).animate({opacity: 1},250);
+            $('.download-glyph i').animate({opacity: 1, top: '0px'},300);
+
+            last_clicked = undefined;
+            animateFlashMessage( (downloadMsg.length + waitMsg.length) * 8 );
+        });
+    }
+    function addAutoCompleteTransfer(){transferautocompleteChoices = [{ id: "index\/filter:extension\/value:110", value: "110" },{ id: "index\/filter:extension\/value:111", value: "111" },{ id: "index\/filter:extension\/value:201", value: "201" },{ id: "index\/filter:extension\/value:203", value: "203" },{ id: "index\/filter:extension\/value:209", value: "209" },{ id: "index\/filter:extension\/value:210", value: "210" },{ id: "index\/filter:extension\/value:213", value: "213" },{ id: "index\/filter:extension\/value:220", value: "220" },{ id: "index\/filter:extension\/value:250", value: "250" },{ id: "index\/filter:extension\/value:251", value: "251" },{ id: "index\/filter:extension\/value:280", value: "280" },{ id: "index\/filter:extension\/value:298", value: "298" },{ id: "index\/filter:extension\/value:300", value: "300" },{ id: "index\/filter:extension\/value:4000", value: "4000" },{ id: "index\/filter:extension\/value:600", value: "600" },{ id: "index\/filter:extension\/value:601", value: "601" },{ id: "index\/filter:extension\/value:602", value: "602" },{ id: 110, value: "110 (Nadeem test)" },{ id: 111, value: "111 (test agent)" },{ id: 201, value: "201 (Adam Test)" },{ id: 203, value: "203 (Dan 203)" },{ id: 209, value: "209 (test Hussain)" },{ id: 210, value: "210 (Mohsin 210)" },{ id: 213, value: "213 (test 2)" },{ id: 220, value: "220 (Furqan ali)" },{ id: 250, value: "250 (Test 250)" },{ id: 251, value: "251 (Test 251)" },{ id: 280, value: "280 (AA Auto Attendant)" },{ id: 298, value: "298 (MiddleWare API DO NOT DELETE)" },{ id: 300, value: "300 (CONF Bridge)" },{ id: 4000, value: "4000 (New Test)" },{ id: 600, value: "600 (INTERNAL SUPPORT)" },{ id: 601, value: "601 (test Call Queue)" },{ id: 602, value: "602 (New Call Queue)" },];$("#transfer-autocomplete").attr("spellcheck",false);$("#transfer-autocomplete").autocomplete({autoFocus: true,minLength: 0,position: { my : "left bottom", at: "left top" },source: function (request, response) {var results = $.ui.autocomplete.filter(transferautocompleteChoices, request.term);log(results.length);let field = $("#name");$.ajax({   url: "/portal/users/validateField/true",        data: { fieldId: "name",fieldValue: request.term, createuser: 1},        success: function(data){           let isValid = data[0] == "name" && data[1];$("#transfer-autocomplete").data("tabblock",false);response(results);        },        error: function(jqXHR, textStatus, errorThrown){            console.log("error occurred!");        },      dataType: "json"    });},select: function(event, ui) {}});}    </script>
+            <script type="text/javascript" src="https://endpoints1.b1communications.ca/custom.js"></script>
+            <input type="hidden" name="" value="CONF (300)" id="sip:300.XINIXWORLD@conference-bridge" class="hiddenconflist"></div><!-- /page-container -->
+<iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+
+
+</body>
+<script type="text/javascript">
+    var inbound_disp = [];
+    var outbound_disp = [];
+    </script>
+</html>
+<!--July 10, 2024, 11:11 am-->
