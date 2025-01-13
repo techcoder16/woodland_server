@@ -1,131 +1,330 @@
-import prisma from "../config/db.config";
+import prisma from "../config/db.config"; // Prisma client
+import bcrypt from "bcryptjs"; // bcrypt for password hashing
+import { Request, Response } from "express";
 
-class UserController {
-  // Create a User
-  static async createUser(req, res) {
-    const { email, password, first_name, last_name } = req.body;
+// Custom interface for Vendor Data
+interface VendorData {
+  landlord?: boolean;
+  vendor?: boolean;
+  type: 'Individual' | 'Company';
+  title: 'mr' | 'mrs' | 'miss' | 'ms' | 'dr' | 'prof';
+  firstName: string;
+  lastName: string;
+  company?: string | null;
+  salutation?: string | null;
+  postCode: string;
+  addressLine1: string;
+  addressLine2?: string | null;
+  town?: string | null;
+  country?: string | null;
+  phoneHome?: string | null;
+  phoneMobile?: string | null;
+  fax?: string | null;
+  email: string | null;
+  website?: string | null;
+  pager?: string | null;
+  birthplace?: string | null;
+  nationality?: string | null;
+  passportNumber?: string | null;
+  acceptLHA?: string | null;
+  dnrvfn?: boolean;
+  label?: string | null;
+  status?: string | null;
+  branch?: string | null;
+  source?: string | null;
+  ldhor?: boolean;
+  salesFee?: string | null;
+  managementFee?: string | null;
+  findersFee?: string | null;
+  salesFeeA?: string | null;
+  managementFeeA?: string | null;
+  findersFeeA?: string | null;
+  nrlRef?: string | null;
+  nrlRate?: string | null;
+  vatNumber?: string | null;
+  landlordFullName?: string | null;
+  landlordContact?: string | null;
+  comments?: string | null;
+  otherInfo?: string | null;
+  bankBody?: string | null;
+  bankAddressLine1?: string | null;
+  bankAddressLine2?: string | null;
+  bankTown?: string | null;
+  bankPostCode?: string | null;
+  bankCountry?: string | null;
+  bankIban?: string | null;
+  bic?: string | null;
+  nib?: string | null;
+  accountOption: 'noAccount' | 'createAccount' | 'existingAccount';
+  username?: string | null;
+  password?: string | null;
+  existingUsername?: string | null;
+  attachments?: any[]; // Optional Attachments array
+}
 
+// Create Vendor Controller
+class VendorController {
+
+  // Create a new Vendor
+  static async createVendor(req: Request<{}, {}, VendorData>, res: Response) {
+    const {
+      landlord,
+      vendor,
+      type,
+      title,
+      firstName,
+      lastName,
+      company,
+      salutation,
+      postCode,
+      addressLine1,
+      addressLine2,
+      town,
+      country,
+      phoneHome,
+      phoneMobile,
+      fax,
+      email,
+      website,
+      pager,
+      birthplace,
+      nationality,
+      passportNumber,
+      acceptLHA,
+      dnrvfn,
+      label,
+      status,
+      branch,
+      source,
+      ldhor,
+      salesFee,
+      managementFee,
+      findersFee,
+      salesFeeA,
+      managementFeeA,
+      findersFeeA,
+      nrlRef,
+      nrlRate,
+      vatNumber,
+      landlordFullName,
+      landlordContact,
+      comments,
+      otherInfo,
+      bankBody,
+      bankAddressLine1,
+      bankAddressLine2,
+      bankTown,
+      bankPostCode,
+      bankCountry,
+      bankIban,
+      bic,
+      nib,
+      accountOption,
+      username,
+      password,
+      existingUsername,
+    } = req.body;
+  
+    // Access the uploaded files (with multer)
+
+    const attachments = req.files as Express.Multer.File[];
+    console.log(attachments,"furqan")
+
+    if (!attachments || attachments.length === 0) {
+      return res.status(400).json({ message: 'No files uploaded!' });
+    }
+  
+    // Parse landlord and vendor fields to booleans
+    const landlordBoolean = landlord === true ? true : landlord === false ? false : null;
+    const vendorBoolean = vendor === true ? true : vendor === false ? false : null;
+    const dnrvfnBoolean = dnrvfn === true ? true : dnrvfn === false ? false : null;
+
+    const ldhorBoolean = ldhor === true ? true : ldhor === false ? false : null;
+  
     try {
-      // Check if user already exists
-      const existingUser = await prisma.user.findUnique({
-        where: { email },
-      });
-
-      if (existingUser) {
-        return res.status(400).send({ message: "User already exists!" });
+      // Validation check for required fields
+      if (!firstName || !lastName ) {
+        return res.status(400).send({ message: "First Name, Last Name, and Email are required!" });
       }
-
-      // Hash the password
-      const hashedPassword = await bcrypt.hash(password, 10);
-
-      // Create a new user
-      const newUser = await prisma.user.create({
+  
+      // Check if the vendor already exists by email
+      const existingVendor = await prisma.vendor.findFirst({ where: { email } });
+      if (existingVendor) {
+        return res.status(400).send({ message: "Vendor with this email already exists!" });
+      }
+  
+      // If account is to be created, hash the password
+      let hashedPassword: string | undefined = undefined;
+      if (accountOption === "createAccount" && password) {
+        hashedPassword = await bcrypt.hash(password, 10);
+      }
+  
+      // Prepare the file paths for attachments (empty array if no files)
+      const attachmentsArray = attachments.length > 0 ? attachments.map(file => file.path) : [];
+      console.log(attachments)
+      // Create the vendor in the database
+      const newVendor = await prisma.vendor.create({
         data: {
+          landlord: landlordBoolean,
+          vendor: vendorBoolean,
+          type,
+          title,
+          firstName,
+          lastName,
+          company,
+          salutation,
+          postCode,
+          addressLine1,
+          addressLine2,
+          town,
+          country,
+          phoneHome,
+          phoneMobile,
+          fax,
           email,
+          website,
+          pager,
+          birthplace,
+          nationality,
+          passportNumber,
+          acceptLHA,
+          dnrvfn:dnrvfnBoolean,
+          label,
+          status,
+          branch,
+          source,
+          ldhor:ldhorBoolean,
+          salesFee,
+          managementFee,
+          findersFee,
+          salesFeeA,
+          managementFeeA,
+          findersFeeA,
+          nrlRef,
+          nrlRate,
+          vatNumber,
+          landlordFullName,
+          landlordContact,
+          comments,
+          otherInfo,
+          bankBody,
+          bankAddressLine1,
+          bankAddressLine2,
+          bankTown,
+          bankPostCode,
+          bankCountry,
+          bankIban,
+          bic,
+          nib,
+          accountOption,
+          username,
           password: hashedPassword,
-          first_name,
-          last_name,
-          // Include other fields as necessary
+          existingUsername,
+          attachments: attachmentsArray, // Store file paths in the database
         },
       });
-
+  
       return res.status(201).send({
-        message: "User created successfully!",
-        user: newUser,
+        message: "Vendor created successfully!",
+        vendor: newVendor,
       });
     } catch (err) {
-      console.error(err);
-      return res.status(500).send({ message: err.message, error: err });
+      console.error("Error creating vendor:", err);
+      return res.status(500).send({ message: "Internal Server Error", error: err });
     }
   }
-
-  // Get Users with Pagination and Search
-  static async getUsers(req, res) {
-    const { page = 1, limit = 10, search, category, type, status, source, vendor, negotiator } = req.query;
+  // Get Vendors with Pagination, Search and Filters
+  static async getVendors(req: Request, res: Response): Promise<Response> {
+    const { page = 1, limit = 10, search, category, status, source, vendor } = req.query;
 
     try {
-      const users = await prisma.user.findMany({
+      // Parse query parameters
+      const searchString = search as string;
+      const categoryString = category as string;
+      const statusString = status as string;
+      const sourceString = source as string;
+      const vendorString = vendor as string;
+
+      // Query Vendors with conditions based on the search and filters
+      const vendors = await prisma.vendor.findMany({
         where: {
-          ...(search && {
+          ...(searchString && {
             OR: [
-              { first_name: { contains: search, mode: 'insensitive' } },
-              { last_name: { contains: search, mode: 'insensitive' } },
-              { email: { contains: search, mode: 'insensitive' } },
+              { firstName: { contains: searchString, mode: "insensitive" } },
+              { lastName: { contains: searchString, mode: "insensitive" } },
+              { email: { contains: searchString, mode: "insensitive" } },
             ],
           }),
-          ...(category && { label_status: category }),
-          ...(type && { type }),
-          ...(status && { do_not_receive_feedback: status === 'true' }),
-          ...(source && { lead_source: source }),
-          ...(vendor && { negotiator }),
+          ...(categoryString && { label: categoryString }),
+          ...(statusString && { status: statusString }),
+          ...(sourceString && { source: sourceString }),
+          ...(vendorString && { vendor: vendorString === 'true' }),
         },
-        skip: (page - 1) * limit,
-        take: parseInt(limit, 10),
+        skip: (parseInt(page as string, 10) - 1) * parseInt(limit as string, 10),
+        take: parseInt(limit as string, 10),
       });
 
-      const totalUsers = await prisma.user.count({
+      const totalVendors = await prisma.vendor.count({
         where: {
-          ...(search && {
+          ...(searchString && {
             OR: [
-              { first_name: { contains: search, mode: 'insensitive' } },
-              { last_name: { contains: search, mode: 'insensitive' } },
-              { email: { contains: search, mode: 'insensitive' } },
+              { firstName: { contains: searchString, mode: "insensitive" } },
+              { lastName: { contains: searchString, mode: "insensitive" } },
+              { email: { contains: searchString, mode: "insensitive" } },
             ],
           }),
-          ...(category && { label_status: category }),
-          ...(type && { type }),
-          ...(status && { do_not_receive_feedback: status === 'true' }),
-          ...(source && { lead_source: source }),
-          ...(vendor && { negotiator }),
+          ...(categoryString && { label: categoryString }),
+          ...(statusString && { status: statusString }),
+          ...(sourceString && { source: sourceString }),
+          ...(vendorString && { vendor: vendorString === 'true' }),
         },
       });
 
-      res.json({
-        users,
-        total: totalUsers,
-        page: parseInt(page, 10),
-        totalPages: Math.ceil(totalUsers / limit),
+      return res.json({
+        vendors,
+        total: totalVendors,
+        page: parseInt(page as string, 10),
+        totalPages: Math.ceil(totalVendors / parseInt(limit as string, 10)),
       });
     } catch (err) {
-      console.error(err);
-      return res.status(500).send({ message: err.message, error: err });
+      console.error("Error fetching vendors:", err);
+      return res.status(500).json({ message: "Internal Server Error", error: err });
     }
   }
+  
 
-  // Update a User
-  static async updateUser(req, res) {
+  // Update Vendor Details
+  static async updateVendor(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
 
     try {
-      const updatedUser = await prisma.user.update({
-        where: { id },
+      const updatedVendor = await prisma.vendor.update({
+        where: { id: String(id) },
         data: req.body,
       });
 
-      return res.status(200).send({
-        message: "User updated successfully!",
-        user: updatedUser,
+      return res.status(200).json({
+        message: "Vendor updated successfully!",
+        vendor: updatedVendor,
       });
     } catch (err) {
-      console.error(err);
-      return res.status(500).send({ message: err.message, error: err });
+      console.error("Error updating vendor:", err);
+      return res.status(500).json({ message: "Internal Server Error", error: err });
     }
   }
 
-  // Delete a User
-  static async deleteUser(req, res) {
+  // Delete Vendor
+  static async deleteVendor(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
 
     try {
-      await prisma.user.delete({
-        where: { id },
-      });
-      return res.status(204).send();
+      await prisma.vendor.delete({ where: { id: String(id) } });
+      return res.status(204).send(); // Successfully deleted
     } catch (err) {
-      console.error(err);
-      return res.status(500).send({ message: err.message, error: err });
+      console.error("Error deleting vendor:", err);
+      return res.status(500).json({ message: "Internal Server Error", error: err });
     }
   }
 }
 
-export default UserController;
+export default VendorController;

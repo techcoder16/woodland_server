@@ -22,6 +22,7 @@ enum Role {
 
 }
 
+
 model User {
   id                String   @id @default(auto()) @map("_id") @db.ObjectId
   usertype          String?
@@ -49,42 +50,71 @@ model User {
   accpet_LHA_DWP    String?
   internal_info     String?
 
-  phone_home        Float?   // New attribute for home phone
-  phone_work        Float?   // New attribute for work phone
-  phone_mobile      Float?   // New attribute for mobile phone
-  do_not_receive_feedback    Boolean? // New attribute for feedback notifications
-  label_status              String?   // New attribute for label status
-  branch                    String?   // New attribute for branch
-  woodland                  String?   // New attribute for woodland
-  negotiator                String?   // New attribute for negotiator
-  lead_source               String?   // New attribute for lead source
-
-  landlord_repairs          Boolean?  // New attribute for landlord repairs
-  looking_to_buy            String?  // New attribute for buying interest
-sales_fees Float? // New attribute for
-finders_fees Float? // New attribute for
-management_fees Float? // New attribute
-NRL_tax Float? // New attribute for
-
-VAT_number Float
-  consented_marketing_category String? // New attribute for marketing consent category
-
-
-  // Bank data attributes
-  bank_body                 String?  // Bank body
-  account_no                String?  // Account number
-  sort_code                 String?  // Sort code
-  account_name              String?  // Account name
-  beneficiary_reference      String?  // Beneficiary reference
-  address_line_1           String?  // Address line 1
-  address_line_2           String?  // Address line 2
-  bank_town                String?  // Town
-  county                    String?  // County
-  postcode                  String?  // Postcode
-  bank_country              String?  // Country
-  iban                      String?  // IBAN
-  bic                       String?  // BIC
-  nib                       String?  // NIB
   createdAt         DateTime @default(now())
   updatedAt         DateTime @default(now())
+}
+
+
+model vendor {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+
+  landlord          Boolean?
+  vendor            Boolean?
+  type              String
+  title             String
+  firstName         String
+  lastName          String
+  company           String?
+  salutation        String?
+  postCode          String
+  addressLine1      String
+  addressLine2      String?
+  town              String?
+  country           String?
+  phoneHome         String?
+  website           String?
+  phoneMobile       String?
+  fax               String?
+  email             String?
+  webste            String?
+  pager             String?
+  birthplace        String?
+  nationality       String?
+  passportNumber    String?
+  acceptLHA         String?
+  dnrvfn            Boolean?
+  label             String?
+  status            String?
+  branch            String?
+  source            String?
+  ldhor             Boolean?
+  salesFee          String?
+  managementFee     String?
+  findersFee        String?
+  salesFeeA         String?
+  managementFeeA    String?
+  findersFeeA       String?
+  nrlRef            String?
+  nrlRate           String?
+  vatNumber         String?
+  landlordFullName  String?
+  landlordContact   String?
+  comments          String?
+  otherInfo         String?
+  bankBody          String?
+  bankAddressLine1  String?
+  bankAddressLine2  String?
+  bankTown          String?
+  bankPostCode      String?
+  bankCountry       String?
+  bankIban          String?
+  bic               String?
+  nib               String?
+  accountOption     String
+  username          String?
+  password          String?
+  existingUsername  String?
+  attachments       String[] // This makes attachments an array of strings (paths or URLs)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
