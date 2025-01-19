@@ -316,6 +316,7 @@ class VendorController {
   // Delete Vendor
   static async deleteVendor(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
+    console.log("id here",id)
 
     try {
       await prisma.vendor.delete({ where: { id: String(id) } });
