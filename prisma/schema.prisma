@@ -72,11 +72,12 @@ model vendor {
   town              String?
   country           String?
   phoneHome         String?
+  negotiator        String?
+  phoneWork         String?
   website           String?
   phoneMobile       String?
   fax               String?
   email             String?
-  webste            String?
   pager             String?
   birthplace        String?
   nationality       String?
@@ -94,6 +95,7 @@ model vendor {
   salesFeeA         String?
   managementFeeA    String?
   findersFeeA       String?
+  nrlTax            String?
   nrlRef            String?
   nrlRate           String?
   vatNumber         String?
@@ -115,6 +117,7 @@ model vendor {
   password          String?
   existingUsername  String?
   attachments       String[] // This makes attachments an array of strings (paths or URLs)
+
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 }
