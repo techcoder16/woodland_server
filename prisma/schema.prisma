@@ -55,8 +55,128 @@ model User {
 }
 
 
+model property{
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  for               String?
+  category          String?
+  propertyType     String?
+  internalReference String?
+  price             String?
+  priceQualifier    String?
+  tenure            String?
+  contractType      String?
+  salesFee          String?
+  postCode          String
+  propertyNo        String?
+  propertyName      String?
+  addressLine1      String?
+  addressLine2      String?
+  town              String?
+  county            String?
+  country           String
+  latitude          Float?
+  longitude         Float?
+  development       String?
+  yearOfBuild       String?
+  parking           String?
+  garden            String?
+  livingFloorSpace  String?
+  meetingRooms      String?
+  workStation       String?
+  landSize          String?
+  outBuildings      Int?
+  propertyFeature   String[]
+  Tags              String?
+  shortSummary      String?
+  fullDescription   String?
+  rooms             Json     // Stores an array of objects [{ title, description, dimensions }]
+  Solicitor         String?
+  
+  GuaranteedRentLandlord String?
+  Branch            String?
+  Negotiator        String?
+  whodoesviewings   String?
+  comments          String?
+  sva               String?
+  tenureA            String?
+  customGarden      String?
+  customParking      String?
+  pets              String?
+
+  train             String?
+
+  occupant          String?
+  occupantEmail    String?
+  occupantMobile     String?
+  moreInfo          String?
+  council           String?
+  freeholder        String?
+  freeholderContract  String?
+  freeholderAddress String?
+
+  nonGasProperty    Boolean?
+  Insurer           String?
+
+
+  photographs          String[]     
+  // Store file URLs for multiple floor plan files (images/PDFs)
+  floorPlans           String[]       
+
+  // EPC Chart: User can either provide energy ratings or upload an EPC chart image
+  epcChartOption       String
+  currentEERating      Int?            // Expected to be 0-100 if "ratings" is selected
+  potentialEERating    Int?            // Expected to be 0-100 if "ratings" is selected
+  epcChartFile         String?         // URL for the uploaded EPC chart (.jpg)
+
+  // EPC/Home Report: Either the user uploads a PDF report or provides a URL
+  epcReportOption      String
+  epcReportFile        String?         // URL for the uploaded PDF report
+  epcReportURL         String?         // Report URL if provided
+
+  // Video tour description and a flag to show it on the website
+  videoTourDescription String?
+  showOnWebsite        Boolean         @default(false)
+
+
+
+  attachements      String[]
+  publishOnWeb      String?
+  status            String?
+  detailPageUrl     String?
+  publishOnPortals  String?
+  portalStatus      String?
+  forA              String?
+  propertyTypeA      String?
+  newHome           Boolean?
+  offPlan           Boolean?
+  virtualTour       String?
+  enterUrl          String?
+  virtualTour2      String?
+  enterUrl2         String?
+  propertyBoucherUrl  String?
+  AdminFee        String?
+  ServiceCharges  String?
+  minimmumTermForLet String?
+  annualGroundRent  String?
+  lengthOfLease     String?
+  shortSummaryForPortals String?
+  fullDescriptionforPortals String?
+  sendtoBoomin        Boolean?
+  CustomDisplayAddress  String?
+  transactionType String?
+  sendOntheMarket Boolean?
+  newsAndExclusive String?
+  selectPortals  String[]
+  vendor        vendor? @relation(fields: [id], references: [id])
+  
+
+
+
+
+}
 model vendor {
   id                String   @id @default(auto()) @map("_id") @db.ObjectId
+
 
   landlord          Boolean?
   vendor            Boolean?
@@ -69,6 +189,7 @@ model vendor {
   postCode          String
   addressLine1      String
   addressLine2      String?
+
   town              String?
   country           String?
   phoneHome         String?
@@ -120,4 +241,6 @@ model vendor {
 
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
+
+  property property[]
 }
