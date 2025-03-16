@@ -55,6 +55,8 @@ model User {
 }
 
 
+
+
 model property{
   id                String   @id @default(auto()) @map("_id") @db.ObjectId
   for               String?
@@ -74,8 +76,8 @@ model property{
   town              String?
   county            String?
   country           String
-  latitude          Float?
-  longitude         Float?
+  latitude          String?
+  longitude         String?
   development       String?
   yearOfBuild       String?
   parking           String?
@@ -84,14 +86,13 @@ model property{
   meetingRooms      String?
   workStation       String?
   landSize          String?
-  outBuildings      Int?
+  outBuildings      String?
   propertyFeature   String[]
   Tags              String?
   shortSummary      String?
   fullDescription   String?
   rooms             Json     // Stores an array of objects [{ title, description, dimensions }]
   Solicitor         String?
-  
   GuaranteedRentLandlord String?
   Branch            String?
   Negotiator        String?
@@ -102,44 +103,30 @@ model property{
   customGarden      String?
   customParking      String?
   pets              String?
-
   train             String?
-
   occupant          String?
   occupantEmail    String?
   occupantMobile     String?
   moreInfo          String?
   council           String?
+  councilBrand           String?
   freeholder        String?
   freeholderContract  String?
-  freeholderAddress String?
-
+  freeholderAddress   String?
   nonGasProperty    Boolean?
   Insurer           String?
-
-
-  photographs          String[]     
-  // Store file URLs for multiple floor plan files (images/PDFs)
-  floorPlans           String[]       
-
-  // EPC Chart: User can either provide energy ratings or upload an EPC chart image
+  photographs          String     
+  floorPlans           String      
   epcChartOption       String
-  currentEERating      Int?            // Expected to be 0-100 if "ratings" is selected
-  potentialEERating    Int?            // Expected to be 0-100 if "ratings" is selected
+  currentEERating      String?            // Expected to be 0-100 if "ratings" is selected
+  potentialEERating    String?            // Expected to be 0-100 if "ratings" is selected
   epcChartFile         String?         // URL for the uploaded EPC chart (.jpg)
-
-  // EPC/Home Report: Either the user uploads a PDF report or provides a URL
   epcReportOption      String
   epcReportFile        String?         // URL for the uploaded PDF report
   epcReportURL         String?         // Report URL if provided
-
-  // Video tour description and a flag to show it on the website
   videoTourDescription String?
-  showOnWebsite        Boolean         @default(false)
-
-
-
-  attachements      String[]
+  showOnWebsite        Boolean?
+  attachments      String[]
   publishOnWeb      String?
   status            String?
   detailPageUrl     String?
@@ -153,31 +140,194 @@ model property{
   enterUrl          String?
   virtualTour2      String?
   enterUrl2         String?
-  propertyBoucherUrl  String?
+  propertyBrochureUrl  String?
   AdminFee        String?
   ServiceCharges  String?
-  minimmumTermForLet String?
+  minimumTermForLet String?
   annualGroundRent  String?
   lengthOfLease     String?
   shortSummaryForPortals String?
   fullDescriptionforPortals String?
-  sendtoBoomin        Boolean?
+  sendToBoomin        Boolean?
+  sendToRightmoveNow  Boolean?
   CustomDisplayAddress  String?
   transactionType String?
-  sendOntheMarket Boolean?
-  newsAndExclusive String?
+  sendToOnTheMarket Boolean?
+  newsAndExclusive Boolean?
   selectPortals  String[]
-  vendor        vendor? @relation(fields: [id], references: [id])
+  vendorId String? @db.ObjectId 
+  vendor            vendor?  @relation(fields: [vendorId], references: [id])
+
+  // Relationships
+  parties                     PropertyParty[]
+  leases                      Lease[]
+  managementAgreements        ManagementAgreement[]
+  tenancyAgreements           TenancyAgreement[]
+  transactions                Transaction[]
+  notes                       Note[]
+  histories                   History[]
+  meters                      Meter[]
+  additionalFeatures          AdditionalPropertyFeature[]
+
   
-
-
-
-
 }
+
+model Tenant{
+id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  
+title String?
+FirstName  String?
+SureName String?
+MobileNo String?
+HomePhone String?
+WorkPhone String?
+Email String?
+EmployeeName String?
+BankAccountNo String?
+SortCode String?
+BankName String?
+IDCheck String?
+
+ propertyPartyId String?        @db.ObjectId @unique
+
+  // Define the relation to PropertyParty using the foreign key field
+propertyParty   PropertyParty? @relation(fields: [propertyPartyId], references: [id])
+
+ 
+}
+model PropertyParty {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+
+  property   property  @relation(fields: [propertyId], references: [id])
+  propertyId String    @db.ObjectId
+ 
+  Tenant     Tenant?
+  vendor      vendor     @relation(fields: [VendorId], references: [id])
+  VendorId    String    @db.ObjectId
+  
+}
+
+
+model Lease {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  property       property  @relation(fields: [propertyId], references: [id])
+  propertyId     String    @db.ObjectId
+  tenantId       String    @db.ObjectId
+
+  landlordId     String    @db.ObjectId
+  rent           Float
+  deposit        Float
+  agreementDate  DateTime?  // Date when the rent agreement was signed (if applicable)
+  startDate      DateTime
+  endDate        DateTime?
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+}
+
+model Meter {
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  property        property  @relation(fields: [propertyId], references: [id])
+  propertyId      String    @db.ObjectId
+  meterType       MeterType
+  reading         Float?
+  lastReadingDate DateTime?
+}
+
+model ManagementAgreement {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  property    property  @relation(fields: [propertyId], references: [id])
+  propertyId  String    @db.ObjectId
+  details     String    // This can be a URL to a file or text details
+  signedDate  DateTime?
+}
+
+model TenancyAgreement {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  property    property  @relation(fields: [propertyId], references: [id])
+  propertyId  String    @db.ObjectId
+
+  tenantId    String    @db.ObjectId
+  details     String
+  signedDate  DateTime?
+}
+
+model Transaction {
+  id              String           @id @default(auto()) @map("_id") @db.ObjectId
+  property        property         @relation(fields: [propertyId], references: [id])
+  propertyId      String           @db.ObjectId
+  amount          Float
+  transactionDate DateTime
+  type            TransactionType
+  description     String?
+}
+
+model Note {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  property   property  @relation(fields: [propertyId], references: [id])
+  propertyId String    @db.ObjectId
+  content    String
+  createdAt  DateTime  @default(now())
+}
+
+model History {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  property   property  @relation(fields: [propertyId], references: [id])
+  propertyId String    @db.ObjectId
+  action     String    // Describes what occurred (e.g. "Rent updated", "Agreement signed")
+  timestamp  DateTime  @default(now())
+}
+
+model AdditionalPropertyFeature {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  property    property @relation(fields: [propertyId], references: [id])
+  propertyId  String   @db.ObjectId
+  featureType String   // e.g. "bed", "garden", etc.
+  value       String?
+  towns       String?
+  PostCode    String?
+  noOfDeds    String?
+  NoOfWC      String?
+  NoOfReceptions String?
+  NoOfCookRooms String?
+  Garden      String?
+  Carpeting   String?
+  GasControlMeeting String?
+  DoubleGazing String?
+  OffStreetParking Boolean?
+  Garage  String?
+  keyNumber Float?
+  Type String?
+  HowDeattached String?
+  Floor String?
+  DoorNumber String?
+
+  Road String?
+  map String[]
+}
+
+enum PartyRole {
+  TENANT
+  LANDLORD
+  SUPPLIER
+  OTHER
+}
+
+enum MeterType {
+  ELECTRIC
+  GAS
+  WATER
+}
+
+enum TransactionType {
+  RENT
+  DEPOSIT
+  FEE
+  OTHER
+}
+
+
 model vendor {
   id                String   @id @default(auto()) @map("_id") @db.ObjectId
-
-
   landlord          Boolean?
   vendor            Boolean?
   type              String
@@ -189,7 +339,6 @@ model vendor {
   postCode          String
   addressLine1      String
   addressLine2      String?
-
   town              String?
   country           String?
   phoneHome         String?
@@ -243,4 +392,9 @@ model vendor {
   updatedAt         DateTime @updatedAt
 
   property property[]
+  
+parties PropertyParty[]
 }
+
+
+
