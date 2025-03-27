@@ -161,13 +161,16 @@ model property{
   // Relationships
   parties                     PropertyParty[]
   leases                      Lease[]
-  managementAgreements        ManagementAgreement[]
-  tenancyAgreements           TenancyAgreement[]
+  rent                        Rent[]
+  
+  managementAgreement        ManagementAgreement[]
+  tenancyAgreement          TenancyAgreement[]
   transactions                Transaction[]
   notes                       Note[]
   histories                   History[]
   meters                      Meter[]
   additionalFeatures          AdditionalPropertyFeature[]
+  supplier                    Supplier[]
 
   
 }
@@ -188,12 +191,9 @@ SortCode String?
 BankName String?
 IDCheck String?
 
- propertyPartyId String?        @db.ObjectId @unique
-
-  // Define the relation to PropertyParty using the foreign key field
-propertyParty   PropertyParty? @relation(fields: [propertyPartyId], references: [id])
-
  
+
+PropertyParty PropertyParty[]
 }
 model PropertyParty {
   id         String    @id @default(auto()) @map("_id") @db.ObjectId
@@ -201,10 +201,63 @@ model PropertyParty {
   property   property  @relation(fields: [propertyId], references: [id])
   propertyId String    @db.ObjectId
  
-  Tenant     Tenant?
+  Tenant     Tenant? @relation(fields: [Tenantid], references: [id])
+  Tenantid String? @db.ObjectId
   vendor      vendor     @relation(fields: [VendorId], references: [id])
   VendorId    String    @db.ObjectId
   
+}
+
+
+model Rent {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  property   property  @relation(fields: [propertyId], references: [id])
+   propertyId String    @db.ObjectId
+  Amount Int
+  ReceivedOn  DateTime
+  HoldBy String
+  ReturnedOn DateTime
+  DateOfAgreement DateTime
+  Deposit Json
+  NoOfOccupant Int
+  DssRef String
+  HowFurnished String
+  Note String
+
+}
+
+model Supplier{
+
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+    property   property  @relation(fields: [propertyId], references: [id])
+   propertyId String    @db.ObjectId
+  electricitySupplier String
+  electricityPhone String
+  electricityMeterNo String
+  electricityReadingOne String
+  electricityReadingTwo String
+  gasSupplier String
+  gasPhone String
+  gasMeterNo String
+  gasReadingOne String
+  gasReadingTwo String
+    WaterSupplier String
+  WaterPhone String
+  WaterMeterNo String
+  WaterReadingOne String
+  WaterReadingTwo String
+    BoroughSupplier String
+  BoroughPhone String
+  BoroughMeterNo String
+  BoroughReadingOne String
+  BoroughReadingTwo String
+
+
+
+  Phone String
+  inventory Json
+
+
 }
 
 
@@ -233,24 +286,42 @@ model Meter {
   lastReadingDate DateTime?
 }
 
-model ManagementAgreement {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  property    property  @relation(fields: [propertyId], references: [id])
-  propertyId  String    @db.ObjectId
-  details     String    // This can be a URL to a file or text details
-  signedDate  DateTime?
-}
-
 model TenancyAgreement {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   property    property  @relation(fields: [propertyId], references: [id])
   propertyId  String    @db.ObjectId
 
-  tenantId    String    @db.ObjectId
+  tenantId    String   
   details     String
+  housingAct String
+  LetterType String
+  TermsandCondition String
+  Guaranteer String
+  Address1 String
+Address2 String
+HideLandlordAdress Boolean
+
   signedDate  DateTime?
 }
 
+model ManagementAgreement{
+  id              String           @id @default(auto()) @map("_id") @db.ObjectId
+  property    property  @relation(fields: [propertyId], references: [id])
+  propertyId  String    @db.ObjectId
+
+  DateofAgreement DateTime
+  AgreementStart DateTime
+  PaymentAgreement DateTime
+  AgreementEnd DateTime
+    Frequency Int
+InventoryCharges Float
+ManagementFees Float
+TermsAndCondition String
+
+
+
+
+}
 model Transaction {
   id              String           @id @default(auto()) @map("_id") @db.ObjectId
   property        property         @relation(fields: [propertyId], references: [id])

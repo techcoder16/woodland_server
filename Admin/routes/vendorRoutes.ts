@@ -10,5 +10,6 @@ router.post('/create',authenticateToken,upload.array('attachments', 15), VendorC
 router.get('/getVendors',authenticateToken ,VendorController.getVendors);
 router.post('/update',authenticateToken,upload.array('attachments', 15), VendorController.updateVendor);
 router.delete('/delete/:id',authenticateToken, VendorController.deleteVendor);
+router.get("/getVendorById/:id",authenticateToken, VendorController.getVendorById);
 
 export default router;

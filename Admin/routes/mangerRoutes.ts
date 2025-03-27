@@ -14,13 +14,6 @@ router.get('/features', authenticateToken, PropertyManageController.getFeatures)
 
 
 // -----------------------------
-// Property Party Routes
-// -----------------------------
-router.get('/parties', authenticateToken, PropertyManageController.getPropertyParties);
-router.put('/parties/update/:id', authenticateToken, PropertyManageController.updatePropertyParty);
-router.delete('/parties/delete/:id', authenticateToken, PropertyManageController.deletePropertyParty);
-
-// -----------------------------
 // Lease Routes
 // -----------------------------
 router.post('/leases/create', authenticateToken, PropertyManageController.createLease);
@@ -39,18 +32,6 @@ router.delete('/meters/delete/:id', authenticateToken, PropertyManageController.
 // -----------------------------
 // Management Agreement Routes
 // -----------------------------
-router.post('/management-agreements/create', authenticateToken, PropertyManageController.createManagementAgreement);
-router.get('/management-agreements', authenticateToken, PropertyManageController.getManagementAgreements);
-router.put('/management-agreements/update/:id', authenticateToken, PropertyManageController.updateManagementAgreement);
-router.delete('/management-agreements/delete/:id', authenticateToken, PropertyManageController.deleteManagementAgreement);
-
-// -----------------------------
-// Tenancy Agreement Routes
-// -----------------------------
-router.post('/tenancy-agreements/create', authenticateToken, PropertyManageController.createTenancyAgreement);
-router.get('/tenancy-agreements', authenticateToken, PropertyManageController.getTenancyAgreements);
-router.put('/tenancy-agreements/update/:id', authenticateToken, PropertyManageController.updateTenancyAgreement);
-router.delete('/tenancy-agreements/delete/:id', authenticateToken, PropertyManageController.deleteTenancyAgreement);
 
 // -----------------------------
 // Transaction Routes
@@ -76,4 +57,39 @@ router.get('/histories', authenticateToken, PropertyManageController.getHistorie
 router.put('/histories/update/:id', authenticateToken, PropertyManageController.updateHistory);
 router.delete('/histories/delete/:id', authenticateToken, PropertyManageController.deleteHistory);
 
+
+
+
+
+    router.post("/party-upsert", authenticateToken,PropertyManageController.upsertPropertyParty);
+    router.get("/property-party-get/:propertyId",authenticateToken, PropertyManageController.getPropertyParty);
+    router.delete("/property-party-delete/:id",authenticateToken, PropertyManageController.deletePropertyParty);
+    
+    router.post("/rent", authenticateToken,PropertyManageController.upsertRent);
+    router.get("/getRent/:propertyId",authenticateToken, PropertyManageController.getRentData);
+    // In your routes file, register the endpoints for supplier upsert and retrieval
+router.post("/supplier", authenticateToken, PropertyManageController.upsertSupplier);
+router.get("/getSupplier/:id", authenticateToken, PropertyManageController.getSupplierData);
+
+// Tenancy Agreement Endpoints
+router.post(
+    "/tenancyAgreement",
+    authenticateToken,
+    PropertyManageController.upsertTenancyAgreement
+  );
+  router.get( "/getTenancyAgreement/:propertyId",authenticateToken,PropertyManageController.getTenancyAgreementData);
+  
+  // Management Agreement Endpoints
+  router.post(
+    "/managementAgreement",
+    authenticateToken,
+    PropertyManageController.upsertManagementAgreement
+  );
+  router.get(
+    "/getManagementAgreement/:propertyId",
+    authenticateToken,
+    PropertyManageController.getManagementAgreementData
+  );
+
+ 
 export default router;

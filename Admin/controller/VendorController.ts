@@ -144,67 +144,7 @@ class VendorController {
       negotiator,
     } = req.body;
   
-    console.log({
-      landlord,
-      vendor,
-      type,
-      title,
-      firstName,
-      lastName,
-      company,
-      salutation,
-      postCode,
-      addressLine1,
-      addressLine2,
-      town,
-      country,
-      phoneHome,
-      phoneMobile,
-      fax,
-      email,
-      website,
-      pager,
-      birthplace,
-      nationality,
-      passportNumber,
-      acceptLHA,
-      dnrvfn,
-      label,
-      status,
-      
-      branch,
-      source,
-      ldhor,  
-      salesFee,
-      managementFee,
-      findersFee,
-      salesFeeA,
-      managementFeeA,
-      findersFeeA,
-      nrlRef,
-      nrlTax,
-      nrlRate,
-      vatNumber,
-      landlordFullName,
-      landlordContact,
-      comments,
-      otherInfo,
-      bankBody,
-      bankAddressLine1,
-      bankAddressLine2,
-      bankTown,
-      bankPostCode,
-      bankCountry,
-      bankIban,
-      bic,
-      nib,
-      accountOption,
-      username,
-      password,
-      existingUsername,
-      phoneWork,
-      negotiator,
-    });
+  
 
     // Access the uploaded files (with multer)
 
@@ -550,12 +490,26 @@ class VendorController {
       }
     }
   
+
+
+
   
   // Delete Vendor
   static async deleteVendor(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
 
     try {
+
+      
+        const property = await prisma.property.findFirst({
+          where: { vendorId: id }
+      });
+  
+      if (property) {
+          return res.status(400).json({ message: "Vendor Cannot be deleted. It is linked with propert." });
+      }
+
+
       await prisma.vendor.delete({ where: { id: String(id) } });
       return res.status(204).send(); // Successfully deleted
     } catch (err) {
@@ -563,6 +517,34 @@ class VendorController {
       return res.status(500).json({ message: "Internal Server Error", error: err });
     }
   }
+
+
+
+  static async getVendorById(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+    
+    try {
+      const vendor = await prisma.vendor.findUnique({ where: { id ,landlord:true} });
+
+      if (!vendor) {
+        return res.status(404).json({ message: "Vendor not found" });
+      }
+
+      return res.json(vendor);
+    } catch (err) {
+      console.error("Error fetching vendor:", err);
+      return res.status(500).json({ message: "Internal Server Error", error: err });
+    }
+  }
+
+
+
+
+
+  // Fetch vendors where landlord = true
+
+
+
 }
 
 export default VendorController;

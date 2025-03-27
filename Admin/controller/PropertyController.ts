@@ -501,7 +501,7 @@ class PropertyController {
     if (!attachments || attachments.length === 0) {
       return res.status(400).json({ message: "No attachments uploaded!" });
     }
-    console.log(showOnWebsite);
+  
     try {
       const updatedProperty = await prisma.property.update({
         where: { id },

@@ -1,6 +1,30 @@
 // src/controllers/propertyManageController.ts
 import { Request, Response } from "express";
 import prisma from "../config/db.config";
+interface PropertyPartyData {
+  id?: string;
+  propertyId: string;
+  tenantId: string;
+  vendorId: string;
+}
+
+// Custom interface for Rent Data
+interface RentData {
+  id?: string;
+  propertyId: string;
+  Amount: string;
+  ReceivedOn: Date;
+  HoldBy: string;
+  ReturnedOn?: Date;
+  DateOfAgreement: Date;
+  Deposit: any;
+  NoOfOccupant: number;
+  DssRef: string;
+  HowFurnished: string;
+  Note: string;
+}
+
+
 
 
 // Controller class for managing additional property-related models
@@ -103,9 +127,6 @@ class PropertyManageController {
   }
 
   
-  
-
-  
   // Get features for a specific property
   static async getFeatures(req: Request, res: Response) {
     const { propertyId } = req.query;
@@ -135,58 +156,11 @@ class PropertyManageController {
   // (Associates parties (tenant, landlord, etc.) with a property)
   // -------------------------------
 
-  // Create a new property party record
+  // Create a new property party 
  
 
-  // Get all parties associated with a property
-  static async getPropertyParties(req: Request, res: Response) {
-    const { propertyId } = req.query;
-    if (!propertyId) {
-      return res.status(400).json({ message: "propertyId is required" });
-    }
-    try {
-      const propertyParties = await prisma.propertyParty.findMany({
-        where: { propertyId: String(propertyId) },
-      
-      });
-      return res.json({ propertyParties });
-    } catch (error) {
-      console.error("Error fetching property parties:", error);
-      return res.status(500).json({ message: "Internal Server Error", error });
-    }
-  }
-
-  // Update a property party record (e.g., update role)
-  static async updatePropertyParty(
-    req: Request<{ id: string }, {}, { role?: string }>,
-    res: Response
-  ) {
-    const { id } = req.params;
-    const { role } = req.body;
-    try {
-      const updatedParty = await prisma.propertyParty.update({
-        where: { id },
-        data: {}
-      });
-      return res.json({ message: "Property party updated", propertyParty: updatedParty });
-    } catch (error) {
-      console.error("Error updating property party:", error);
-      return res.status(500).json({ message: "Internal Server Error", error });
-    }
-  }
 
   // Delete a property party record
-  static async deletePropertyParty(req: Request<{ id: string }>, res: Response) {
-    const { id } = req.params;
-    try {
-      await prisma.propertyParty.delete({ where: { id } });
-      return res.status(204).send();
-    } catch (error) {
-      console.error("Error deleting property party:", error);
-      return res.status(500).json({ message: "Internal Server Error", error });
-    }
-  }
-
   // -------------------------------
   // Lease CRUD
   // (Manage rent/deposit, agreement dates, etc.)
@@ -340,148 +314,6 @@ class PropertyManageController {
     }
   }
 
-  // -------------------------------
-  // Management Agreement CRUD
-  // -------------------------------
-
-  // Create a management agreement record
-  static async createManagementAgreement(req: Request, res: Response) {
-    const { propertyId, details, signedDate } = req.body;
-    if (!propertyId || !details) {
-      return res.status(400).json({ message: "propertyId and details are required" });
-    }
-    try {
-      const agreement = await prisma.managementAgreement.create({
-        data: {
-          propertyId,
-          details,
-          signedDate: signedDate ? new Date(signedDate) : null,
-        },
-      });
-      return res.status(201).json({ message: "Management agreement created", agreement });
-    } catch (error) {
-      console.error("Error creating management agreement:", error);
-      return res.status(500).json({ message: "Internal Server Error", error });
-    }
-  }
-
-  // Get management agreements for a property
-  static async getManagementAgreements(req: Request, res: Response) {
-    const { propertyId } = req.query;
-    if (!propertyId) {
-      return res.status(400).json({ message: "propertyId is required" });
-    }
-    try {
-      const agreements = await prisma.managementAgreement.findMany({
-        where: { propertyId: String(propertyId) },
-      });
-      return res.json({ agreements });
-    } catch (error) {
-      console.error("Error fetching management agreements:", error);
-      return res.status(500).json({ message: "Internal Server Error", error });
-    }
-  }
-
-  // Update a management agreement
-  static async updateManagementAgreement(req: Request<{ id: string }, {}, any>, res: Response) {
-    const { id } = req.params;
-    const data = req.body;
-    if (data.signedDate) data.signedDate = new Date(data.signedDate);
-    try {
-      const updatedAgreement = await prisma.managementAgreement.update({
-        where: { id },
-        data,
-      });
-      return res.json({ message: "Management agreement updated", agreement: updatedAgreement });
-    } catch (error) {
-      console.error("Error updating management agreement:", error);
-      return res.status(500).json({ message: "Internal Server Error", error });
-    }
-  }
-
-  // Delete a management agreement
-  static async deleteManagementAgreement(req: Request<{ id: string }>, res: Response) {
-    const { id } = req.params;
-    try {
-      await prisma.managementAgreement.delete({ where: { id } });
-      return res.status(204).send();
-    } catch (error) {
-      console.error("Error deleting management agreement:", error);
-      return res.status(500).json({ message: "Internal Server Error", error });
-    }
-  }
-
-  // -------------------------------
-  // Tenancy Agreement CRUD
-  // -------------------------------
-
-  // Create a tenancy agreement record
-  static async createTenancyAgreement(req: Request, res: Response) {
-    const { propertyId, tenantId, details, signedDate } = req.body;
-    if (!propertyId || !tenantId || !details) {
-      return res.status(400).json({ message: "propertyId, tenantId and details are required" });
-    }
-    try {
-      const agreement = await prisma.tenancyAgreement.create({
-        data: {
-          propertyId,
-          tenantId,
-          details,
-          signedDate: signedDate ? new Date(signedDate) : null,
-        },
-      });
-      return res.status(201).json({ message: "Tenancy agreement created", agreement });
-    } catch (error) {
-      console.error("Error creating tenancy agreement:", error);
-      return res.status(500).json({ message: "Internal Server Error", error });
-    }
-  }
-
-  // Get tenancy agreements for a property
-  static async getTenancyAgreements(req: Request, res: Response) {
-    const { propertyId } = req.query;
-    if (!propertyId) {
-      return res.status(400).json({ message: "propertyId is required" });
-    }
-    try {
-      const agreements = await prisma.tenancyAgreement.findMany({
-        where: { propertyId: String(propertyId) },
-      });
-      return res.json({ agreements });
-    } catch (error) {
-      console.error("Error fetching tenancy agreements:", error);
-      return res.status(500).json({ message: "Internal Server Error", error });
-    }
-  }
-
-  // Update a tenancy agreement
-  static async updateTenancyAgreement(req: Request<{ id: string }, {}, any>, res: Response) {
-    const { id } = req.params;
-    const data = req.body;
-    if (data.signedDate) data.signedDate = new Date(data.signedDate);
-    try {
-      const updatedAgreement = await prisma.tenancyAgreement.update({
-        where: { id },
-        data,
-      });
-      return res.json({ message: "Tenancy agreement updated", agreement: updatedAgreement });
-    } catch (error) {
-      console.error("Error updating tenancy agreement:", error);
-      return res.status(500).json({ message: "Internal Server Error", error });
-    }
-  }
-
-  // Delete a tenancy agreement
-  static async deleteTenancyAgreement(req: Request<{ id: string }>, res: Response) {
-    const { id } = req.params;
-    try {
-      await prisma.tenancyAgreement.delete({ where: { id } });
-      return res.status(204).send();
-    } catch (error) {
-      console.error("Error deleting tenancy agreement:", error);
-      return res.status(500).json({ message: "Internal Server Error", error });
-    }
-  }
 
   // -------------------------------
   // Transaction CRUD
@@ -694,6 +526,545 @@ class PropertyManageController {
       return res.status(500).json({ message: "Internal Server Error", error });
     }
   }
+
+
+
+
+  static async upsertPropertyParty(req: Request<{}, {}, PropertyPartyData>, res: Response) {
+    const { propertyId, tenantId, vendorId } = req.body;
+    console.log(tenantId,vendorId,"firqan")
+    if (!vendorId)
+    {
+      return res.status(400).json({ message: "Both Tenant and Vendor must be provided." });
+    }
+    if (!tenantId ) {
+      console.log("adsjajdhsajk")
+     
+    }
+
+    try {
+      const existingEntry = await prisma.propertyParty.findFirst({
+        where: { propertyId },
+      });
+      console.log(existingEntry);
+    
+      if (existingEntry) {
+        // Update existing entry
+        const updatedEntry = await prisma.propertyParty.update({
+          where: { id: existingEntry.id },
+          data: { propertyId, Tenantid:tenantId, VendorId:vendorId },
+        });
+        return res.status(200).json({ message: "Parties updated successfully!", data: updatedEntry });
+      } else {
+        // Create new entry
+        const newEntry = await prisma.propertyParty.create({
+          data: { propertyId, Tenantid:tenantId, VendorId:vendorId },
+        });
+        return res.status(201).json({ message: "Parties created successfully!", data: newEntry });
+      }
+    } catch (err) {
+      console.error("Error upserting PropertyParty:", err);
+      return res.status(500).json({ message: "Internal Server Error", error: err });
+    }
+  }
+
+  // Get PropertyParty by Property ID
+  static async getPropertyParty(req: Request, res: Response) {
+    const { propertyId } = req.params;
+
+    try {
+      const parties = await prisma.propertyParty.findMany({
+        where: { propertyId },
+        include: { Tenant: true, vendor: true }, // Assuming relations exist
+      });
+
+      if (!parties.length) {
+        return res.status(404).json({ message: "No PropertyParty found for this property." });
+      }
+
+      return res.json(parties);
+    } catch (err) {
+      console.error("Error fetching PropertyParty:", err);
+      return res.status(500).json({ message: "Internal Server Error", error: err });
+    }
+  }
+
+  // Delete a PropertyParty
+  static async deletePropertyParty(req: Request, res: Response) {
+    const { id } = req.params;
+
+    try {
+      await prisma.propertyParty.delete({ where: { id } });
+      return res.status(204).send();
+    } catch (err) {
+      console.error("Error deleting PropertyParty:", err);
+      return res.status(500).json({ message: "Internal Server Error", error: err });
+    }
+  }
+
+
+  static async upsertRent(req: Request, res: Response) {
+    const {
+      propertyId,
+      Amount,
+      ReceivedOn,
+      HoldBy,
+      ReturnedOn,
+      DateOfAgreement,
+      Deposit,
+      NoOfOccupant,
+      DssRef,
+      HowFurnished,
+      Note,
+    } = req.body;
+  
+    console.log("Property ID:", propertyId);
+  
+    try {
+      // Find an existing rent entry by propertyId
+      const existingRent = await prisma.rent.findFirst({
+        where: { propertyId },
+      });
+  
+      let rent;
+  
+      if (existingRent) {
+        // Update existing rent entry
+        rent = await prisma.rent.update({
+          where: { id: existingRent.id }, // Use the unique id for updating
+          data: {
+            Amount,
+            ReceivedOn,
+            HoldBy,
+            ReturnedOn,
+            DateOfAgreement,
+            Deposit,
+            NoOfOccupant,
+            DssRef,
+            HowFurnished,
+            Note,
+          },
+        });
+      } else {
+        // Create new rent entry
+        rent = await prisma.rent.create({
+          data: {
+            propertyId,
+            Amount,
+            ReceivedOn,
+            HoldBy,
+            ReturnedOn,
+            DateOfAgreement,
+            Deposit,
+            NoOfOccupant,
+            DssRef,
+            HowFurnished,
+            Note,
+          },
+        });
+      }
+  
+      return res.status(200).json({
+        message: "Rent data upserted successfully!",
+        rent,
+      });
+    } catch (err) {
+      console.error("Error upserting rent:", err);
+      return res.status(500).json({ message: "Internal Server Error", error: err });
+    }
+  }
+
+  
+  
+
+  // ✅ Get Rent Data (Optional filter by propertyId)
+  static async getRentData(req: Request, res: Response) {
+    const { propertyId, page = 1, limit = 10 } = req.query;
+
+    try {
+      const pageNumber = parseInt(page as string, 10);
+      const limitNumber = parseInt(limit as string, 10);
+
+      const filters: any = {};
+      if (propertyId) {
+        filters.propertyId = propertyId as string;
+      }
+
+      const rents = await prisma.rent.findFirst({
+        where: filters,
+
+      });
+
+      const totalRents = await prisma.rent.count({
+        where: filters,
+      });
+
+      return res.json({
+        rents,
+        total: totalRents,
+        page: pageNumber,
+        totalPages: Math.ceil(totalRents / limitNumber),
+      });
+    } catch (err) {
+      console.error("Error fetching rent data:", err);
+      return res.status(500).json({ message: "Internal Server Error", error: err });
+    }
+  }
+  
+
+
+  // Supplier related APIs in your controller (e.g., PropertyManageController or SupplierController)
+
+static async upsertSupplier(req: Request, res: Response) {
+  const {
+    id, // optional: if provided, the upsert will update an existing supplier
+    propertyId,
+    electricitySupplier,
+    electricityPhone,
+    electricityMeterNo,
+    electricityReadingOne,
+    electricityReadingTwo,
+    gasSupplier,
+    gasPhone,
+    gasMeterNo,
+    gasReadingOne,
+    gasReadingTwo,
+    WaterSupplier,
+    WaterPhone,
+    WaterMeterNo,
+    WaterReadingOne,
+    WaterReadingTwo,
+    BoroughSupplier,
+    BoroughPhone,
+    BoroughMeterNo,
+    BoroughReadingOne,
+    BoroughReadingTwo,
+    Phone,
+    inventory,
+  } = req.body;
+
+  try {
+    let supplier;
+    if (id) {
+      // Attempt to find an existing supplier by id
+      const existingSupplier = await prisma.supplier.findUnique({
+        where: { id },
+      });
+
+      if (existingSupplier) {
+        // Update the existing supplier record
+        supplier = await prisma.supplier.update({
+          where: { id },
+          data: {
+            propertyId,
+            electricitySupplier,
+            electricityPhone,
+            electricityMeterNo,
+            electricityReadingOne,
+            electricityReadingTwo,
+            gasSupplier,
+            gasPhone,
+            gasMeterNo,
+            gasReadingOne,
+            gasReadingTwo,
+            WaterSupplier,
+            WaterPhone,
+            WaterMeterNo,
+            WaterReadingOne,
+            WaterReadingTwo,
+            BoroughSupplier,
+            BoroughPhone,
+            BoroughMeterNo,
+            BoroughReadingOne,
+            BoroughReadingTwo,
+            Phone,
+            inventory,
+          },
+        });
+      } else {
+        // If no supplier is found with the given id, create a new record
+        supplier = await prisma.supplier.create({
+          data: {
+            propertyId,
+            electricitySupplier,
+            electricityPhone,
+            electricityMeterNo,
+            electricityReadingOne,
+            electricityReadingTwo,
+            gasSupplier,
+            gasPhone,
+            gasMeterNo,
+            gasReadingOne,
+            gasReadingTwo,
+            WaterSupplier,
+            WaterPhone,
+            WaterMeterNo,
+            WaterReadingOne,
+            WaterReadingTwo,
+            BoroughSupplier,
+            BoroughPhone,
+            BoroughMeterNo,
+            BoroughReadingOne,
+            BoroughReadingTwo,
+            Phone,
+            inventory,
+          },
+        });
+      }
+    } else {
+      // If no id is provided, create a new supplier entry
+      supplier = await prisma.supplier.create({
+        data: {
+          propertyId,
+          electricitySupplier,
+          electricityPhone,
+          electricityMeterNo,
+          electricityReadingOne,
+          electricityReadingTwo,
+          gasSupplier,
+          gasPhone,
+          gasMeterNo,
+          gasReadingOne,
+          gasReadingTwo,
+          WaterSupplier,
+          WaterPhone,
+          WaterMeterNo,
+          WaterReadingOne,
+          WaterReadingTwo,
+          BoroughSupplier,
+          BoroughPhone,
+          BoroughMeterNo,
+          BoroughReadingOne,
+          BoroughReadingTwo,
+          Phone,
+          inventory,
+        },
+      });
+    }
+
+    return res.status(200).json({
+      message: "Supplier upserted successfully!",
+      supplier,
+    });
+  } catch (err) {
+    console.error("Error upserting supplier:", err);
+    return res.status(500).json({ message: "Internal Server Error", error: err });
+  }
+}
+
+static async getSupplierData(req: Request, res: Response) {
+  // We assume supplier id is passed as a route parameter
+  const { propertyId } = req.params;
+
+  try {      const filters: any = {};
+          if (propertyId) {
+        filters.propertyId = propertyId as string;
+      }
+
+    const supplier = await prisma.supplier.findFirst({
+      where: filters,
+    });
+
+    if (!supplier) {
+      return res.status(404).json({ message: "Supplier not found" });
+    }
+
+    return res.status(200).json({ supplier });
+  } catch (err) {
+    console.error("Error fetching supplier data:", err);
+    return res.status(500).json({ message: "Internal Server Error", error: err });
+  }
+}
+
+
+static async upsertTenancyAgreement(req: Request, res: Response) {
+  const {
+    propertyId,
+    tenantId,
+    details,
+    housingAct,
+    LetterType,
+    TermsandCondition,
+    Guaranteer,
+    Address1,
+    Address2,
+    HideLandlordAdress,
+    signedDate, // Optional DateTime
+  } = req.body;
+
+  try {
+    console.log(propertyId)
+    
+    // Find an existing tenancy agreement by propertyId
+    const existingAgreement = await prisma.tenancyAgreement.findFirst({
+      where: { propertyId },
+    });
+
+    let agreement;
+    console.log(HideLandlordAdress)
+    if (existingAgreement) {
+      // Update existing agreement
+      agreement = await prisma.tenancyAgreement.update({
+        where: { id: existingAgreement.id },
+        data: {
+          tenantId,
+          details,
+          housingAct,
+          LetterType,
+          TermsandCondition,
+          Guaranteer,
+          Address1,
+          Address2,
+          HideLandlordAdress,
+          signedDate,
+        },
+      });
+    } else {
+      // Create new tenancy agreement
+      agreement = await prisma.tenancyAgreement.create({
+        data: {
+          propertyId,
+          tenantId,
+          details,
+          housingAct,
+          LetterType,
+          TermsandCondition,
+          Guaranteer,
+          Address1,
+          Address2,
+          HideLandlordAdress,
+          signedDate,
+        },
+      });
+    }
+
+    return res.status(200).json({
+      message: "Tenancy Agreement upserted successfully!",
+      agreement,
+    });
+  } catch (err) {
+    console.error("Error upserting tenancy agreement:", err);
+    return res.status(500).json({
+      message: "Internal Server Error",
+      error: err,
+    });
+  }
+}
+
+static async getTenancyAgreementData(req: Request, res: Response) {
+  const { propertyId } = req.params; // Expecting propertyId as route parameter
+console.log(propertyId)
+  try {
+    const agreement = await prisma.tenancyAgreement.findFirst({
+      where: { propertyId },
+    });
+
+    if (!agreement) {
+      return res.status(404).json({ message: "Tenancy Agreement not found" });
+    }
+
+    return res.status(200).json({ agreement });
+  } catch (err) {
+    console.error("Error fetching tenancy agreement:", err);
+    return res.status(500).json({
+      message: "Internal Server Error",
+      error: err,
+    });
+  }
+}
+
+// ------------------- ManagementAgreements Methods -------------------
+static async upsertManagementAgreement(req: Request, res: Response) {
+  const {
+    propertyId,
+    DateofAgreement,
+    AgreementStart,
+    PaymentAgreement,
+    AgreementEnd,
+    Frequency,
+    InventoryCharges,
+    ManagementFees,
+    TermsAndCondition,
+  } = req.body;
+
+  try {
+    // Find an existing management agreement by propertyId
+    const existingAgreement = await prisma.managementAgreement.findFirst({
+      where: { propertyId },
+    });
+
+    let agreement;
+
+    if (existingAgreement) {
+      // Update existing management agreement
+      agreement = await prisma.managementAgreement.update({
+        where: { id: existingAgreement.id },
+        data: {
+          DateofAgreement,
+          AgreementStart,
+          PaymentAgreement,
+          AgreementEnd,
+          Frequency,
+          InventoryCharges,
+          ManagementFees,
+          TermsAndCondition,
+        },
+      });
+    } else {
+      // Create new management agreement
+      agreement = await prisma.managementAgreement.create({
+        data: {
+          propertyId,
+          DateofAgreement,
+          AgreementStart,
+          PaymentAgreement,
+          AgreementEnd,
+          Frequency,
+          InventoryCharges,
+          ManagementFees,
+          TermsAndCondition,
+        },
+      });
+    }
+
+    return res.status(200).json({
+      message: "Management Agreement upserted successfully!",
+      agreement,
+    });
+  } catch (err) {
+    console.error("Error upserting management agreement:", err);
+    return res.status(500).json({
+      message: "Internal Server Error",
+      error: err,
+    });
+  }
+}
+
+static async getManagementAgreementData(req: Request, res: Response) {
+  const { propertyId } = req.params; // Expecting propertyId as route parameter
+console.log(propertyId)
+  try {
+    const agreement = await prisma.managementAgreement.findFirst({
+      where: { propertyId },
+    });
+
+    if (!agreement) {
+      return res.status(404).json({ message: "Management Agreement not found" });
+    }
+
+    return res.status(200).json({ agreement });
+  } catch (err) {
+    console.error("Error fetching management agreement:", err);
+    return res.status(500).json({
+      message: "Internal Server Error",
+      error: err,
+    });
+  }
+}
+
+
+
+
 }
 
 export default PropertyManageController;

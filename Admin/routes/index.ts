@@ -14,7 +14,7 @@ router.use("/property", propertyRoutes);
 
 router.use("/manager",mangerRoutes);
 
-router.use("/tenantn",tenantRoutes);
+router.use("/tenant",tenantRoutes);
 
 // router.use("/data", dataRoutes);
 

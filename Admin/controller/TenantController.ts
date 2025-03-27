@@ -35,9 +35,22 @@ class TenantController {
       BankName,
       IDCheck,
     } = req.body;
-
+console.log(req.body)
     // You can add validation if needed
     try {
+
+      console.log({  title,
+        FirstName,
+        SureName,
+        MobileNo,
+        HomePhone,
+        WorkPhone,
+        Email,
+        EmployeeName,
+        BankAccountNo,
+        SortCode,
+        BankName,
+        IDCheck,})
       const newTenant = await prisma.tenant.create({
         data: {
           title,
@@ -106,8 +119,9 @@ class TenantController {
 
   // Update an existing Tenant
   static async updateTenant(req: Request<{ id: string }, {}, TenantData>, res: Response) {
-    const { id } = req.params;
+ 
     const {
+      id,
       title,
       FirstName,
       SureName,
@@ -125,7 +139,7 @@ class TenantController {
     if (!id) {
       return res.status(400).json({ message: "Tenant ID is required." });
     }
-
+console.log(id)
     try {
       const updatedTenant = await prisma.tenant.update({
         where: { id },
@@ -160,6 +174,15 @@ class TenantController {
     const { id } = req.params;
 
     try {
+      const propertyParty = await prisma.propertyParty.findFirst({
+        where: { Tenantid: id }
+    });
+
+    if (propertyParty) {
+        return res.status(400).json({ message: "Tenant cannot be deleted as they are associated with a property parties." });
+    }
+
+
       await prisma.tenant.delete({ where: { id } });
       return res.status(204).send();
     } catch (err) {
