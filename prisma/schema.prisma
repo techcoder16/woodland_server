@@ -49,6 +49,7 @@ model User {
   passport          String?
   accpet_LHA_DWP    String?
   internal_info     String?
+   role        Role     @default(User)
 
   createdAt         DateTime @default(now())
   updatedAt         DateTime @default(now())

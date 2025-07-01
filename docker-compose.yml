@@ -1,0 +1,78 @@
+version: "3.9"
+services:
+  mongo:
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    command: ["--replSet", "rs0", "--bind_ip_all"]
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
+  mongo-init:
+    image: mongo:latest
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: "no"
+    command: >
+      bash -c "
+        echo 'Waiting for MongoDB to be ready...'
+        sleep 10
+        echo 'Initializing replica set...'
+        mongosh --host mongo:27017 --eval '
+          try {
+            var status = rs.status();
+            print(\"Replica set status: \" + status.ok);
+            if (status.members && status.members.length > 0) {
+              print(\"Replica set already configured\");
+            }
+          } catch(e) {
+            print(\"Initiating replica set...\");
+            var result = rs.initiate({
+              _id: \"rs0\",
+              members: [{ _id: 0, host: \"mongo:27017\" }]
+            });
+            print(\"Replica set initiation result: \" + JSON.stringify(result));
+            
+            // Wait for replica set to be ready
+            var attempts = 0;
+            while (attempts < 30) {
+              try {
+                var status = rs.status();
+                if (status.members && status.members[0].stateStr === \"PRIMARY\") {
+                  print(\"Replica set is ready!\");
+                  break;
+                }
+              } catch(e) {
+                print(\"Waiting for replica set... attempt \" + attempts);
+              }
+              sleep(2000);
+              attempts++;
+            }
+          }
+        '
+        echo 'MongoDB replica set initialization complete'
+      "
+
+  admin-app:
+    build: .
+    depends_on:
+      mongo-init:
+        condition: service_completed_successfully
+    ports:
+      - "5002:5002"
+    environment:
+      - DATABASE_URL=mongodb://mongo:27017/woodland?replicaSet=rs0
+    volumes:
+      - ./Admin:/app/Admin
+      - ./prisma:/app/prisma
+
+volumes:
+  mongo-data:

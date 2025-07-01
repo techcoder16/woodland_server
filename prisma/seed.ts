@@ -1,6 +1,6 @@
-  import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Role } from '@prisma/client';
 
-  import { Role } from "@prisma/client";
+//  import { Role } from "@prisma/client";
   import bcrypt from 'bcrypt';
 
   const salt = bcrypt.genSaltSync(10);
@@ -15,15 +15,15 @@
       update: {},
       create: {
         email: "admin@woodland.com",
-        name: "Admin User",
-        role: Role.Admin,
+       role: Role.Admin,
         password: hash,
-        phoneNumber: parseFloat("03211045386"),
+       
       },
     });
 
     
     
+  console.log("✅ Seeding complete.");
     
   }
   main()

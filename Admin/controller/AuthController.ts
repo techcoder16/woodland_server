@@ -27,7 +27,6 @@ class AuthController {
 
       if (isMatch && getEmail) {
         const user = {
-          name: getEmail.name,
           email: getEmail.email,
    
         };

@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  admin:
+    build:
+      context: .
+      dockerfile: Dockerfile.admin
+    container_name: admin-app
+    ports:
+      - "5002:5002"
+    volumes:
+      - ./Admin:/app/Admin
+      - ./prisma:/app/prisma
+      - /app/Admin/node_modules
+    environment:
+      - DATABASE_URL=mongodb://mongo:27017/mydb
+    depends_on:
+      - mongo
+
+volumes:
+  mongo-data:
+
